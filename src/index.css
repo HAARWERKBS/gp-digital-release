@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    @apply bg-gray-50 text-gray-900;
+  }
+
+  /* Windows-Kompatibilität: Eingabefelder - App ist IMMER dunkel, daher dunkle Styles */
+  input, textarea, select {
+    color: #e2e8f0 !important; /* slate-200 - helle Schrift */
+    background-color: #334155 !important; /* slate-700 - dunkler Hintergrund */
+    -webkit-user-select: text;
+    user-select: text;
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: #64748b !important; /* slate-500 */
+  }
+
+  /* Windows: Verhindert dass Eingabefelder nach alert() blockiert werden */
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: #06b6d4 !important; /* cyan-500 */
+  }
+}
+
+/* Easter Egg: 3D Flip Card Animation */
+.perspective-500 {
+  perspective: 500px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
