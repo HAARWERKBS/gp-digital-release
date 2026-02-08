@@ -206,34 +206,10 @@ export default function StudentsPage() {
         setEditingStudent(undefined);
     };
 
-    // --- Excel Export (mit Blattschutz) ---
+    // --- Excel Export (ohne Blattschutz - einfacher Export) ---
     const handleExcelExport = () => {
-        // Admin-Passwort für Excel-Schutz abfragen
-        let excelPassword = '';
-
-        if (adminPasswordHash) {
-            // Admin-Passwort ist gesetzt - Benutzer muss es eingeben
-            const inputPassword = prompt(
-                'Bitte geben Sie das Admin-Passwort ein.\n\n' +
-                'Dieses Passwort wird für den Excel-Blattschutz verwendet.\n' +
-                '(Zum Entsperren in Excel: Überprüfen → Blattschutz aufheben)'
-            );
-            if (!inputPassword) {
-                alert('Export abgebrochen. Ein Passwort ist erforderlich für den Blattschutz.');
-                return;
-            }
-            excelPassword = inputPassword;
-        } else {
-            // Kein Admin-Passwort gesetzt - Standard-Passwort verwenden
-            excelPassword = 'Pruefling2024';
-            alert(
-                'Hinweis: Kein Admin-Passwort in den Einstellungen gesetzt.\n\n' +
-                'Die Excel-Datei wird mit dem Standard-Passwort "Pruefling2024" geschützt.\n\n' +
-                'Empfehlung: Setzen Sie ein Admin-Passwort in den Einstellungen.'
-            );
-        }
-
-        const formatDate = (d?: string) => d ? new Date(d).toLocaleDateString('de-DE') : '';
+        try {
+            const formatDate = (d?: string) => d ? new Date(d).toLocaleDateString('de-DE') : '';
         const exportData = data.students.map(s => ({
             "Anrede": s.gender || "",
             "Vorname": s.firstName,
@@ -265,33 +241,25 @@ export default function StudentsPage() {
         }));
 
         const wb = XLSX.utils.book_new();
-        const ws = XLSX.utils.json_to_sheet(exportData);
+            const ws = XLSX.utils.json_to_sheet(exportData);
+            XLSX.utils.book_append_sheet(wb, ws, "Prüflinge");
 
-        // Blattschutz mit dem Admin-Passwort aktivieren
-        // Hinweis: Excel-Blattschutz ist nicht kryptografisch sicher,
-        // bietet aber Schutz gegen versehentliche Änderungen
-        ws['!protect'] = {
-            password: excelPassword,
-            sheet: true,
-            objects: true,
-            scenarios: true,
-            formatCells: false,      // Formatierung sperren
-            formatColumns: false,    // Spaltenformatierung sperren
-            formatRows: false,       // Zeilenformatierung sperren
-            insertColumns: false,    // Spalten einfügen sperren
-            insertRows: false,       // Zeilen einfügen sperren
-            insertHyperlinks: false, // Hyperlinks einfügen sperren
-            deleteColumns: false,    // Spalten löschen sperren
-            deleteRows: false,       // Zeilen löschen sperren
-            selectLockedCells: true, // Gesperrte Zellen auswählen erlauben
-            sort: false,             // Sortieren sperren
-            autoFilter: false,       // Autofilter sperren
-            pivotTables: false,      // Pivot-Tabellen sperren
-            selectUnlockedCells: true // Ungesperrte Zellen auswählen erlauben
-        };
-
-        XLSX.utils.book_append_sheet(wb, ws, "Prüflinge");
-        XLSX.writeFile(wb, `Prueflinge_Export_${new Date().toISOString().split('T')[0]}.xlsx`);
+            // Verwende Blob + Download-Link (funktioniert in Electron und Browser)
+            const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+            const blob = new Blob([wbout], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Prueflinge_Export_${new Date().toISOString().split('T')[0]}.xlsx`;
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(() => {
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }, 100);
+        } catch (error) {
+            console.error('Excel-Export Fehler:', error);
+        }
     };
 
     // --- Excel Import (mit Update-Funktion für bestehende Prüflinge) ---
@@ -1031,15 +999,23 @@ function StudentModal({ onClose, onSave, initialData }: { onClose: () => void, o
         e.preventDefault();
         setValidationError(null);
 
-        const parsedDob = parseGermanDate(formData.dob);
-        const parsedStart = parseGermanDate(formData.trainingStart);
-        const parsedEnd = parseGermanDate(formData.trainingEnd);
-        const parsedExamDate1 = formData.examDatePart1 ? parseGermanDate(formData.examDatePart1) : undefined;
-        const parsedExamDate2 = formData.examDatePart2 ? parseGermanDate(formData.examDatePart2) : undefined;
+        // Datumsfelder parsen - leere Felder sind erlaubt
+        const parsedDob = formData.dob.trim() ? parseGermanDate(formData.dob) : undefined;
+        const parsedStart = formData.trainingStart.trim() ? parseGermanDate(formData.trainingStart) : undefined;
+        const parsedEnd = formData.trainingEnd.trim() ? parseGermanDate(formData.trainingEnd) : undefined;
+        const parsedExamDate1 = formData.examDatePart1?.trim() ? parseGermanDate(formData.examDatePart1) : undefined;
+        const parsedExamDate2 = formData.examDatePart2?.trim() ? parseGermanDate(formData.examDatePart2) : undefined;
 
-        if (!parsedDob || !parsedStart || !parsedEnd) {
-            // Inline-Fehler statt alert() - verhindert Fokus-Probleme auf Windows
-            setValidationError("Bitte geben Sie gültige Daten im Format TT.MM.JJJJ ein (z.B. 26.03.1974).");
+        // Nur prüfen wenn ein Datum eingegeben wurde aber ungültig ist
+        const invalidDates: string[] = [];
+        if (formData.dob.trim() && !parsedDob) invalidDates.push('Geburtsdatum');
+        if (formData.trainingStart.trim() && !parsedStart) invalidDates.push('Lehrzeit von');
+        if (formData.trainingEnd.trim() && !parsedEnd) invalidDates.push('Lehrzeit bis');
+        if (formData.examDatePart1?.trim() && !parsedExamDate1) invalidDates.push('Prüfungsdatum Teil 1');
+        if (formData.examDatePart2?.trim() && !parsedExamDate2) invalidDates.push('Prüfungsdatum Teil 2');
+
+        if (invalidDates.length > 0) {
+            setValidationError(`Ungültiges Datumsformat bei: ${invalidDates.join(', ')}. Bitte Format TT.MM.JJJJ verwenden.`);
             return;
         }
 
@@ -1099,7 +1075,7 @@ function StudentModal({ onClose, onSave, initialData }: { onClose: () => void, o
                         <div className="grid grid-cols-3 gap-4">
                             <label className="block">
                                 <span className={cn(LABEL_CLASSES, formData.dob && !isDateValid(formData.dob) && "text-red-400")}>Geburtsdatum</span>
-                                <input type="text" placeholder="TT.MM.JJJJ" required
+                                <input type="text" placeholder="TT.MM.JJJJ"
                                     className={cn(INPUT_CLASSES,
                                         formData.dob && !isDateValid(formData.dob) && "bg-red-900/30 border-red-500/50 text-red-200"
                                     )}

@@ -550,29 +550,20 @@ export const GesamtNiederschrift: React.FC<GesamtNiederschriftProps> = ({ studen
                     </Text>
                 </View>
 
-                {/* Unterschriften */}
+                {/* Unterschriften - 3 nebeneinander */}
                 <View style={styles.signaturesContainer}>
-                    {/* 3 Unterschriften oben nebeneinander */}
                     <View style={styles.signaturesTop}>
                         <View style={styles.signatureBlock}>
                             <View style={styles.signatureLine} />
-                            <Text style={styles.signatureName}>Vorsitzender</Text>
+                            <Text style={styles.signatureName}>Vorsitzende/r</Text>
                         </View>
                         <View style={styles.signatureBlock}>
                             <View style={styles.signatureLine} />
-                            <Text style={styles.signatureName}>{allExaminers[0] || 'Herr Prüfer'}</Text>
+                            <Text style={styles.signatureName}>1. Prüfer/in</Text>
                         </View>
                         <View style={styles.signatureBlock}>
                             <View style={styles.signatureLine} />
-                            <Text style={styles.signatureName}>{allExaminers[1] || 'Frau Prüfer'}</Text>
-                        </View>
-                    </View>
-
-                    {/* 1 Unterschrift unten links */}
-                    <View style={styles.signaturesBottom}>
-                        <View style={styles.signatureBlock}>
-                            <View style={styles.signatureLine} />
-                            <Text style={styles.signatureName}>Div. Beisitzer</Text>
+                            <Text style={styles.signatureName}>2. Prüfer/in</Text>
                         </View>
                     </View>
                 </View>

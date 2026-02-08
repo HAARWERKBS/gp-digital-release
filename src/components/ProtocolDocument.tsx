@@ -311,30 +311,19 @@ export const ProtocolDocument: React.FC<ProtocolDocumentProps> = ({ student, she
                     </View>
                 </View>
 
-                {/* Unterschriften - 3 oben nebeneinander */}
+                {/* Unterschriften - 3 nebeneinander */}
                 <View style={styles.signaturesTop}>
                     <View style={styles.signatureBlock}>
                         <View style={styles.signatureLine} />
-                        <Text style={styles.signatureName}>Vorsitzender</Text>
+                        <Text style={styles.signatureRole}>Vorsitzende/r</Text>
                     </View>
                     <View style={styles.signatureBlock}>
                         <View style={styles.signatureLine} />
-                        <Text style={styles.signatureName}>{examinerNames[0] || 'Herr Prüfer'}</Text>
-                        <Text style={styles.signatureRole}>(Prüfer)</Text>
+                        <Text style={styles.signatureRole}>1. Prüfer/in</Text>
                     </View>
                     <View style={styles.signatureBlock}>
                         <View style={styles.signatureLine} />
-                        <Text style={styles.signatureName}>{examinerNames[1] || 'Frau Prüfer'}</Text>
-                        <Text style={styles.signatureRole}>(Prüfer)</Text>
-                    </View>
-                </View>
-
-                {/* Unterschrift unten links - Div. Beisitzer */}
-                <View style={styles.signaturesBottom}>
-                    <View style={styles.signatureBlock}>
-                        <View style={styles.signatureLine} />
-                        <Text style={styles.signatureName}>Div. Beisitzer</Text>
-                        <Text style={styles.signatureRole}>(Prüfer)</Text>
+                        <Text style={styles.signatureRole}>2. Prüfer/in</Text>
                     </View>
                 </View>
 

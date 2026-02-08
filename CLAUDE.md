@@ -85,7 +85,7 @@ LicenseInfo (localStorage: gp_digital_license)
 - `CustomTextFieldsEditor.tsx` - Editor for adding/managing custom text fields on certificates. Supports up to 10 fields with name, x/y position, font size (8-24pt), alignment (left/center/right), and bold option.
 - `PruefungsZeugnis.tsx` - Official exam certificate with grades, Notenschlüssel, and optional Innung logo
 - `ProtocolDocument.tsx` - Grading protocol per student (Niederschrift Teil 1/2)
-- `GesamtNiederschrift.tsx` - Complete exam documentation with all Teil 1 & Teil 2 results on one page, BESTANDEN/NICHT BESTANDEN box, signature lines (Vorsitzender, Prüfer, Div. Beisitzer)
+- `GesamtNiederschrift.tsx` - Complete exam documentation with all Teil 1 & Teil 2 results on one page, BESTANDEN/NICHT BESTANDEN box, signature lines (Vorsitzende/r, 1. Prüfer/in, 2. Prüfer/in)
 - `CertificateDocument.tsx` - Legacy certificate component
 - `GesellenbriefSeriendruck.tsx` - Batch printing for multiple certificates
 
@@ -125,7 +125,7 @@ PDF generation uses `@react-pdf/renderer` with `StyleSheet.create()` for styling
 - Multiple examiners (P1, P2, P3) per task supported
 
 ### Multi-Jahrgang System
-Supports multiple exam cohorts (Sommer/Winter sessions, repeaters). Each Jahrgang has isolated student/grade data. Global settings (Innung, grade scale, Prüferpool) are shared across all Jahrgänge.
+Supports multiple exam cohorts (Sommer/Winter sessions, repeaters). Each Jahrgang has isolated student/grade data. Global settings (Innung, grade scale, Prüferpool) are shared across all Jahrgänge. Students can be moved between Jahrgänge (e.g., for "Nachprüfung") via `moveStudentToJahrgang()` - requires admin password.
 
 ### Prüferpool (Examiner Pool)
 Central management of examiners with roles (Vorsitzender, Prüfer, Beisitzer). Examiners can be toggled active/inactive. In GradingPage, examiners are selected from dropdown instead of free text input when pool is populated.
@@ -152,10 +152,11 @@ Required icons in `public/`: `icon.png` (512x512), `icon.icns` (macOS), `icon.ic
 
 **Route Guard**: `LicenseRoute.tsx` checks license before any page access.
 
-**License Key Format**: `GPDIG-XXXXX-XXXXX-XXXXX` (23 characters)
+**License Key Format**: `GPDIG-YYMM-XXXXX-XXXXX` (23 characters)
+- YYMM = expiry date (e.g., 2612 = Dec 2026), 9999 = permanent
 - Checksum validation in `src/lib/types.ts` (`validateLicenseKey()`)
 - Stored in localStorage: `gp_digital_license`
-- Generator tool: `lizenz-generator.html` (standalone HTML)
+- Generator tool: `node generate-license.js` or `lizenz-generator.html`
 
 **Pages**:
 - `LicensePage.tsx` - License activation (auto-formats input)
