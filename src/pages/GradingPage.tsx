@@ -8,6 +8,7 @@ import { PDFDownloadLink } from '@react-pdf/renderer';
 import { ProtocolDocument } from '../components/ProtocolDocument';
 import { GesamtNiederschrift } from '../components/GesamtNiederschrift';
 import { PruefungsZeugnis } from '../components/PruefungsZeugnis';
+import { AnlageBescheinigung } from '../components/AnlageBescheinigung';
 import { DEFAULT_GRADE_SCALE, DEFAULT_INNUNG } from '../lib/types';
 import GlobalExaminerSelector from '../components/GlobalExaminerSelector';
 
@@ -975,6 +976,30 @@ export default function GradingPage() {
                                     className="relative px-6 py-2.5 bg-gradient-to-b from-slate-600 to-slate-700 text-slate-200 rounded-lg hover:from-slate-500 hover:to-slate-600 transition-all font-medium flex items-center gap-2 border border-slate-500/30 z-10"
                                 >
                                     {({ loading }) => (loading ? 'Lade PDF...' : `Niederschrift Teil ${sheet.part} (PDF)`)}
+                                </PDFDownloadLink>
+                            )}
+                            {/* Anlage zur Bescheinigung */}
+                            {student && (
+                                <PDFDownloadLink
+                                    document={
+                                        <AnlageBescheinigung
+                                            student={student}
+                                            sheet={sheet}
+                                            grade={{
+                                                studentId: student.id,
+                                                sheetId: sheet.id,
+                                                examiners,
+                                                examPieceExaminers: sheet.examPiece ? examPieceExaminers : undefined,
+                                                theoryScores: sheet.theorySubjects ? theoryScores : undefined,
+                                                date: new Date().toISOString()
+                                            }}
+                                            part={sheet.part as 1 | 2}
+                                        />
+                                    }
+                                    fileName={`anlage_bescheinigung_teil${sheet.part}_${student.lastName}_${student.firstName}.pdf`}
+                                    className="relative px-6 py-2.5 bg-gradient-to-b from-amber-600 to-amber-700 text-white rounded-lg hover:from-amber-500 hover:to-amber-600 transition-all font-medium flex items-center gap-2 border border-amber-500/30 z-10"
+                                >
+                                    {({ loading }) => (loading ? 'Lade PDF...' : `Anlage Bescheinigung Teil ${sheet.part} (PDF)`)}
                                 </PDFDownloadLink>
                             )}
                             {/* Gesamtniederschrift - nur wenn beide Teile bewertet */}
