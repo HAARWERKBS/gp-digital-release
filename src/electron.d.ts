@@ -5,6 +5,7 @@ interface UpdateInfo {
     latestVersion: string;
     downloadUrl?: string;
     releaseNotes?: string;
+    updateUrl?: string;
     hasUpdate: boolean;
 }
 

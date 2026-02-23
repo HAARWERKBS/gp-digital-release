@@ -81,13 +81,49 @@ ipcMain.handle('get-app-version', () => {
     return APP_VERSION;
 });
 
+// ============================================
+// UPDATE-CHECK mit zukunftssicherer URL-Umleitung
+// ============================================
+
+const DEFAULT_VERSION_URL = 'https://raw.githubusercontent.com/HAARWERKBS/gp-digital-release/main/public/version.json';
+const savedUpdateUrlPath = path.join(app.getPath('userData'), 'update-url.json');
+
+// Gespeicherte Update-URL laden (falls durch updateUrl-Feld umgeleitet)
+function getVersionUrl() {
+    try {
+        if (fs.existsSync(savedUpdateUrlPath)) {
+            const saved = JSON.parse(fs.readFileSync(savedUpdateUrlPath, 'utf-8'));
+            if (saved.url) return saved.url;
+        }
+    } catch (e) { /* Keine gespeicherte URL → Standard verwenden */ }
+    return DEFAULT_VERSION_URL;
+}
+
+// Neue Update-URL speichern (für zukünftige Umzüge)
+function saveUpdateUrl(newUrl) {
+    try {
+        fs.writeFileSync(savedUpdateUrlPath, JSON.stringify({ url: newUrl }, null, 2), 'utf-8');
+    } catch (e) {
+        console.error('Fehler beim Speichern der Update-URL:', e);
+    }
+}
+
 // IPC Handler für Update-Check
 ipcMain.handle('check-for-updates', async () => {
+    const versionUrl = getVersionUrl();
+
     try {
-        // Prüfe GitHub für neue Version
-        const response = await fetch('https://raw.githubusercontent.com/Hairschneider/gp-digital/main/version.json');
+        // Prüfe Version vom Produktions-Repo
+        const response = await fetch(versionUrl);
         if (response.ok) {
             const data = await response.json();
+
+            // Wenn updateUrl gesetzt → für zukünftige Checks merken
+            if (data.updateUrl && data.updateUrl !== '' && data.updateUrl !== versionUrl) {
+                console.log('Update-URL umgeleitet:', data.updateUrl);
+                saveUpdateUrl(data.updateUrl);
+            }
+
             return {
                 currentVersion: APP_VERSION,
                 latestVersion: data.version,
@@ -97,8 +133,29 @@ ipcMain.handle('check-for-updates', async () => {
             };
         }
     } catch (error) {
-        console.error('Update-Check fehlgeschlagen:', error);
+        console.error('Update-Check fehlgeschlagen (URL: ' + versionUrl + '):', error.message);
+
+        // Fallback: Wenn gespeicherte URL fehlschlägt, Original-URL versuchen
+        if (versionUrl !== DEFAULT_VERSION_URL) {
+            try {
+                console.log('Fallback auf Standard-URL...');
+                const fallbackResponse = await fetch(DEFAULT_VERSION_URL);
+                if (fallbackResponse.ok) {
+                    const data = await fallbackResponse.json();
+                    return {
+                        currentVersion: APP_VERSION,
+                        latestVersion: data.version,
+                        downloadUrl: data.downloadUrl,
+                        releaseNotes: data.releaseNotes,
+                        hasUpdate: data.version !== APP_VERSION
+                    };
+                }
+            } catch (fallbackError) {
+                console.error('Auch Fallback fehlgeschlagen:', fallbackError.message);
+            }
+        }
     }
+
     return {
         currentVersion: APP_VERSION,
         latestVersion: APP_VERSION,
