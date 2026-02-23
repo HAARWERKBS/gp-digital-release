@@ -78,6 +78,8 @@ LicenseInfo (localStorage: gp_digital_license)
 - **GesellenbriefePage** (`src/pages/GesellenbriefePage.tsx`) - Print journeyman certificates for passed students. Filters using `isPassed()` (Gesamtnote + Sperrfach-Prüfung). Supports serial printing (Seriendruck) and custom background images.
 **Routing**: Uses `HashRouter` (not `BrowserRouter`) for Electron `file://` compatibility.
 
+**Sorting**: All student lists are sorted by `examNumber` (Prüfungsnummer, numeric-first with string fallback). This applies consistently across StudentsPage (grid + list), GradingPage (sidebar), and GesellenbriefePage.
+
 - **SettingsPage** (`src/pages/SettingsPage.tsx`) - Admin-only: Exam structure configuration, Innung settings with logo upload, grade scale, Prüferpool management, data backup/restore. Each section (Innung, Notenschlüssel, Prüfungsstruktur) has its own local save button that becomes active when changes are detected.
 
 ### PDF Components (`src/components/`)

@@ -90,7 +90,12 @@ export default function GesellenbriefePage() {
             }
         });
 
-        return results.sort((a, b) => a.student.lastName.localeCompare(b.student.lastName));
+        return results.sort((a, b) => {
+            const numA = parseInt(a.student.examNumber) || 0;
+            const numB = parseInt(b.student.examNumber) || 0;
+            if (numA !== numB) return numA - numB;
+            return a.student.examNumber.localeCompare(b.student.examNumber);
+        });
     }, [data.students, data.grades, data.sheets]);
 
     const selectedStudent = selectedStudentId

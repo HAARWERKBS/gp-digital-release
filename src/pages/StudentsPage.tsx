@@ -80,7 +80,13 @@ export default function StudentsPage() {
             s.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
             s.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
             s.salon.toLowerCase().includes(searchTerm.toLowerCase())
-        );
+        )
+        .sort((a, b) => {
+            const numA = parseInt(a.examNumber) || 0;
+            const numB = parseInt(b.examNumber) || 0;
+            if (numA !== numB) return numA - numB;
+            return a.examNumber.localeCompare(b.examNumber);
+        });
 
     const activeCount = data.students.filter(s => s.isActive).length;
     const inactiveCount = data.students.filter(s => !s.isActive).length;
