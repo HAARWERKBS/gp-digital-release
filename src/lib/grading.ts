@@ -35,15 +35,55 @@ export const calculateWorkTaskGrade = (weightedPoints: number) => {
 };
 
 /**
- * Prüft ob die Prüfung bestanden ist
+ * Prüft ob die Prüfung bestanden ist (gemäß GPO)
  * Bestanden wenn:
- * - Gesamtnote mindestens 4 (ausreichend)
- * - Keine Teilnote schlechter als 5
+ * - Gesamtnote mindestens 4 (ausreichend), d.h. >= 50 Punkte
+ * - Kein Prüfungsbereich mit Note 6 (ungenügend) bewertet
+ *
+ * Prüfungsbereiche für Sperrfach-Check:
+ * - Teil 1 Gesamt
+ * - Teil 2 Praxis (Friseur- und Kosmetikdienstleistungen)
+ * - Teil 2 Theorie: Friseurtechniken
+ * - Teil 2 Theorie: Betriebsorganisation
+ * - Teil 2 Theorie: WiSo
  */
-export const isPassed = (finalGrade: number, partGrades: number[]) => {
-    if (finalGrade > 4) return false;
-    if (partGrades.some(g => g > 5)) return false;
-    return true;
+export const isPassed = (finalGrade: number, partGrades: number[]): { passed: boolean; failReasons: string[] } => {
+    const failReasons: string[] = [];
+
+    if (finalGrade > 4) {
+        failReasons.push('Gesamtnote schlechter als "ausreichend"');
+    }
+
+    if (partGrades.some(g => g >= 6)) {
+        failReasons.push('Note "ungenügend" (6) in einem Prüfungsbereich');
+    }
+
+    return { passed: failReasons.length === 0, failReasons };
+};
+
+/**
+ * Berechnet das Ergebnis von Teil 2 der Gesellenprüfung
+ * Gemäß GPO/Prüfungsrechner: Praxis 60% + Theorie 40%
+ *
+ * Quelle: Mail Sebastian Kunde/LIV Niedersachsen 16.06.2023:
+ * "Der Faktor: Praxis: 60% => Faktor: 0.6 und Theorie: 40% => Faktor 0.4
+ *  bezieht sich auf den 75% Anteil am Gesamtergebnis der Gesellenprüfung."
+ *
+ * Quelle: Excel GP Software 2024.xlsm, Zeile K116:
+ * =PRODUCT(D116,0.6)+PRODUCT(K114,0.4)
+ */
+export const calculatePart2Total = (praxisPoints: number, theoryPercent: number) => {
+    const praxisWeighted = praxisPoints * 0.6;
+    const theoryWeighted = theoryPercent * 0.4;
+    const total = praxisWeighted + theoryWeighted;
+    return {
+        praxisPoints,
+        theoryPercent,
+        praxisWeighted,
+        theoryWeighted,
+        total,
+        grade: calculateGradeFromPercent(total)
+    };
 };
 
 /**
@@ -63,17 +103,28 @@ export const calculateFinalResult = (part1Points: number, part2Points: number) =
 
 /**
  * Berechnet Theorie-Gesamtpunkte
- * Schriftlich x2 + Mündlich x1, dann Durchschnitt
+ * Pro Fach: Schriftlich ×2 + Mündlich ×1, dann Durchschnitt
+ * Wenn keine mündliche Prüfung (oral === 0 und hasOral false): nur durch 2 teilen
+ *
+ * Excel-Formel: Z107: =(2*I107+I108)/IF(H108>0,3,2)
+ * D.h. wenn mündliche Punkte > 0, dann /3, sonst /2
  */
 export const calculateTheoryTotal = (
-    scores: Array<{ written: number; oral: number }>
+    scores: Array<{ written: number; oral: number; hasOral?: boolean }>
 ) => {
     let totalWeighted = 0;
     let totalWeight = 0;
 
     scores.forEach(s => {
-        totalWeighted += s.written * 2 + s.oral * 1;
-        totalWeight += 3; // 2 + 1
+        // Mündliche Prüfung ist optional (wie in Excel: IF(H108>0,3,2))
+        const hasOralExam = s.hasOral !== undefined ? s.hasOral : (s.oral > 0);
+        if (hasOralExam) {
+            totalWeighted += s.written * 2 + s.oral * 1;
+            totalWeight += 3; // 2 + 1
+        } else {
+            totalWeighted += s.written * 2;
+            totalWeight += 2; // nur schriftlich
+        }
     });
 
     const avgPoints = totalWeight > 0 ? totalWeighted / totalWeight : 0;
@@ -83,6 +134,19 @@ export const calculateTheoryTotal = (
         percent: avgPoints, // Punkte sind bereits 0-100
         grade: calculateGradeFromPercent(avgPoints)
     };
+};
+
+/**
+ * Berechnet Theorie-Note pro Einzelfach
+ * Schriftlich ×2 + Mündlich ×1, dann Durchschnitt → Note
+ * Excel: Z107: =(2*I107+I108)/IF(H108>0,3,2)
+ */
+export const calculateTheorySubjectPercent = (written: number, oral: number, hasOral?: boolean) => {
+    const hasOralExam = hasOral !== undefined ? hasOral : (oral > 0);
+    if (hasOralExam) {
+        return (written * 2 + oral * 1) / 3;
+    }
+    return (written * 2) / 2; // = written, aber für Konsistenz
 };
 
 export const getGradeColor = (grade: number) => {

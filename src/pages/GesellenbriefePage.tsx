@@ -5,7 +5,7 @@ import { PDFDownloadLink, PDFViewer } from '@react-pdf/renderer';
 import { GesellenbriefDocument, GesellenbriefSeriendruck } from '../components/GesellenbriefDocument';
 import { CertificatePositionEditor } from '../components/CertificatePositionEditor';
 import { Student, Grade, GradingSheet, CustomTextField, DEFAULT_CUSTOM_TEXT_FIELDS } from '../lib/types';
-import { calculateGrade } from '../lib/grading';
+import { calculateGrade, calculateGradeFromPercent, isPassed } from '../lib/grading';
 import { cn } from '../lib/utils';
 
 export default function GesellenbriefePage() {
@@ -48,17 +48,45 @@ export default function GesellenbriefePage() {
             const part1ExamPiecePoints = sheetPart1.examPiece ? getExamPieceAvg(gradePart1, sheetPart1.examPiece.id) : 0;
             const part1Total = (part1WorkTaskPoints * sheetPart1.workTaskWeight) + (part1ExamPiecePoints * sheetPart1.examPieceWeight);
 
-            // Teil 2 Berechnung
+            // Teil 2: Praxis (60%) + Theorie (40%) gemäß GPO
             const part2WorkTaskPoints = sheetPart2.tasks.reduce((sum, t) => sum + (getAvgScore(gradePart2, t.id) * t.weight), 0);
             const part2ExamPiecePoints = sheetPart2.examPiece ? getExamPieceAvg(gradePart2, sheetPart2.examPiece.id) : 0;
-            const part2Total = (part2WorkTaskPoints * sheetPart2.workTaskWeight) + (part2ExamPiecePoints * sheetPart2.examPieceWeight);
+            const part2Praxis = (part2WorkTaskPoints * sheetPart2.workTaskWeight) + (part2ExamPiecePoints * sheetPart2.examPieceWeight);
 
-            // Gesamtergebnis
+            // Theorie berechnen
+            let theoryPercent = 0;
+            const theorySubjectGradeValues: number[] = [];
+            if (sheetPart2.theorySubjects && gradePart2.theoryScores) {
+                const subjectPercents: number[] = [];
+                sheetPart2.theorySubjects.forEach(subject => {
+                    const score = gradePart2.theoryScores?.find(ts => ts.subjectId === subject.id);
+                    if (score) {
+                        const written = score.writtenPoints || 0;
+                        const oral = score.oralPoints || 0;
+                        const subjectPct = oral > 0 ? (written * 2 + oral) / 3 : written;
+                        subjectPercents.push(subjectPct);
+                        theorySubjectGradeValues.push(calculateGradeFromPercent(subjectPct).value);
+                    }
+                });
+                if (subjectPercents.length > 0) {
+                    theoryPercent = subjectPercents.reduce((a, b) => a + b, 0) / subjectPercents.length;
+                }
+            }
+
+            const part2Total = (part2Praxis * 0.6) + (theoryPercent * 0.4);
+
+            // Gesamtergebnis: Teil 1 (25%) + Teil 2 (75%)
             const totalPoints = (part1Total * 0.25) + (part2Total * 0.75);
-            const passed = totalPoints >= 50;
+            const finalGrade = calculateGradeFromPercent(totalPoints);
 
-            if (passed) {
-                results.push({ student, totalPoints, passed });
+            // Sperrfach-Prüfung gemäß GPO
+            const part1Grade = calculateGradeFromPercent(part1Total);
+            const part2PraxisGrade = calculateGradeFromPercent(part2Praxis);
+            const allPartGrades = [part1Grade.value, part2PraxisGrade.value, ...theorySubjectGradeValues];
+            const passResult = isPassed(finalGrade.value, allPartGrades);
+
+            if (passResult.passed) {
+                results.push({ student, totalPoints, passed: true });
             }
         });
 

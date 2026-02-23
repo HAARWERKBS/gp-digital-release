@@ -67,7 +67,7 @@ LicenseInfo (localStorage: gp_digital_license)
 
 - **`src/lib/types.ts`** - Core TypeScript types: `Student`, `Grade`, `GradingSheet`, `Jahrgang`, `GlobalSettings`, `CertificatePositions`. Contains `INITIAL_DATA` with default exam structure and `DEFAULT_CERTIFICATE_POSITIONS`.
 
-- **`src/lib/grading.ts`** - Grade calculation logic. German grading system (1-6 scale). Final grade: Teil 1 (25%) + Teil 2 (75%). Pass threshold: 50 points.
+- **`src/lib/grading.ts`** - Grade calculation logic (GPO-konform). Key functions: `calculatePart2Total()` (Praxis×0.6 + Theorie×0.4), `calculateTheoryTotal()` / `calculateTheorySubjectPercent()` (schriftl.×2 + mündl.×1), `isPassed()` (Gesamtnote + Sperrfach-Prüfung), `calculateFinalResult()` (Teil 1×0.25 + Teil 2×0.75).
 
 ### Pages
 
@@ -75,7 +75,9 @@ LicenseInfo (localStorage: gp_digital_license)
 - **WelcomePage** (`src/pages/WelcomePage.tsx`) - Login page with first-time setup flow
 - **StudentsPage** (`src/pages/StudentsPage.tsx`) - Student management with list/grid views, Excel import/export, active/inactive status toggle. View mode persists in localStorage.
 - **GradingPage** (`src/pages/GradingPage.tsx`) - Exam grading interface for Teil 1 and Teil 2, multiple examiners per student, PDF generation. Examiners can be selected from Prüferpool dropdown.
-- **GesellenbriefePage** (`src/pages/GesellenbriefePage.tsx`) - Print journeyman certificates for passed students. Shows only students with ≥50 points. Supports serial printing (Seriendruck) and custom background images.
+- **GesellenbriefePage** (`src/pages/GesellenbriefePage.tsx`) - Print journeyman certificates for passed students. Filters using `isPassed()` (Gesamtnote + Sperrfach-Prüfung). Supports serial printing (Seriendruck) and custom background images.
+**Routing**: Uses `HashRouter` (not `BrowserRouter`) for Electron `file://` compatibility.
+
 - **SettingsPage** (`src/pages/SettingsPage.tsx`) - Admin-only: Exam structure configuration, Innung settings with logo upload, grade scale, Prüferpool management, data backup/restore. Each section (Innung, Notenschlüssel, Prüfungsstruktur) has its own local save button that becomes active when changes are detected.
 
 ### PDF Components (`src/components/`)
@@ -87,7 +89,7 @@ LicenseInfo (localStorage: gp_digital_license)
 - `ProtocolDocument.tsx` - Grading protocol per student (Niederschrift Teil 1/2)
 - `GesamtNiederschrift.tsx` - Complete exam documentation with all Teil 1 & Teil 2 results on one page, BESTANDEN/NICHT BESTANDEN box, signature lines (Vorsitzende/r, 1. Prüfer/in, 2. Prüfer/in)
 - `CertificateDocument.tsx` - Legacy certificate component
-- `GesellenbriefSeriendruck.tsx` - Batch printing for multiple certificates
+- `AnlageBescheinigung.tsx` - Attachment certificate (Anlage zur Bescheinigung)
 
 PDF generation uses `@react-pdf/renderer` with `StyleSheet.create()` for styling. Points display uses `.toFixed(2)` for precision. Innung logo appears in header when configured.
 
@@ -116,13 +118,30 @@ PDF generation uses `@react-pdf/renderer` with `StyleSheet.create()` for styling
 - **Teil 2** (Part 2): 75% weight - 6 practical tasks + 1 exam piece + 3 theory subjects
 - Exam pieces (Prüfungsstück) can be toggled on/off via `sheet.pruefungsstueckEnabled` in Settings
 
-### Grading Rules
+### Grading Rules (GPO-konform)
 - Points 0-100 per task
 - Grade thresholds (configurable): 92+=1 (sehr gut), 81+=2 (gut), 67+=3 (befriedigend), 50+=4 (ausreichend), 30+=5 (mangelhaft), <30=6 (ungenügend)
-- Work tasks (Arbeitsaufgaben) weighted 70%, exam piece 30%
-- Theory: written×2 + oral×1 (oral grade optional)
-- Examiner grades are averaged per task
-- Multiple examiners (P1, P2, P3) per task supported
+- Praxis: Arbeitsaufgaben × 0.7 + Prüfungsstück × 0.3
+- Theory per subject: (written × 2 + oral × 1) / 3; without oral: written × 2 / 2 (Excel: `=(2*I107+I108)/IF(H108>0,3,2)`)
+- **Teil 2 = Praxis × 0.6 + Theorie × 0.4** (Excel K116: `=PRODUCT(D116,0.6)+PRODUCT(K114,0.4)`)
+- **Gesamt = Teil 1 × 0.25 + Teil 2 × 0.75**
+- Multiple examiners (P1, P2, P3) per task, grades averaged
+
+### Bestanden-Logik (Pass/Fail)
+Implemented in `isPassed()` (`grading.ts`), returns `{ passed: boolean; failReasons: string[] }`.
+
+**Bestanden wenn:**
+1. Gesamtnote ≤ 4 (mindestens „ausreichend", d.h. ≥ 50%)
+2. Kein Prüfungsbereich mit Note 6 (Sperrfach-Regel)
+
+**Prüfungsbereiche für Sperrfach-Check:**
+- Teil 1 Gesamt
+- Teil 2 Praxis (Friseur- und Kosmetikdienstleistungen)
+- Teil 2 Theorie: Friseurtechniken
+- Teil 2 Theorie: Betriebsorganisation
+- Teil 2 Theorie: WiSo
+
+**Quellen:** Prüfungsrechner R.Fuhs 1.22, GP Software 2024.xlsm, Mail Sebastian Kunde/LIV Niedersachsen (16.06.2023)
 
 ### Multi-Jahrgang System
 Supports multiple exam cohorts (Sommer/Winter sessions, repeaters). Each Jahrgang has isolated student/grade data. Global settings (Innung, grade scale, Prüferpool) are shared across all Jahrgänge. Students can be moved between Jahrgänge (e.g., for "Nachprüfung") via `moveStudentToJahrgang()` - requires admin password.
@@ -133,12 +152,12 @@ Central management of examiners with roles (Vorsitzender, Prüfer, Beisitzer). E
 ## Electron Desktop App
 
 ### Structure
-- **`electron/main.js`** - Main process: window management, IPC handlers for version check and external URLs
-- **`electron/preload.js`** - Context bridge exposing `window.electronAPI` to React app
+- **`electron/main.cjs`** - Main process: window management, IPC handlers for version check and external URLs
+- **`electron/preload.cjs`** - Context bridge exposing `window.electronAPI` to React app
 - **`src/electron.d.ts`** - TypeScript definitions for Electron API
 
 ### Update System
-The app checks `version.json` from GitHub to notify users of available updates. The URL is configured in `electron/main.js:83`:
+The app checks `version.json` from GitHub to notify users of available updates. The URL is configured in `electron/main.cjs`:
 ```
 https://raw.githubusercontent.com/Hairschneider/gp-digital/main/version.json
 ```

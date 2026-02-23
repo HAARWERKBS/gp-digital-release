@@ -1,0 +1,3458 @@
+{
+  "students": [
+    {
+      "id": "s1",
+      "firstName": "Anna",
+      "lastName": "Schneider",
+      "gender": "Frau",
+      "dob": "15.03.1999",
+      "birthPlace": "Hannover",
+      "birthCountry": "Deutschland",
+      "street": "Musterstraße",
+      "houseNumber": "12",
+      "zip": "30159",
+      "city": "Hannover",
+      "email": "anna.schneider@email.de",
+      "mobile": "0170-1234567",
+      "company": "Haarstudio Eleganz",
+      "companyPhone": "0511-9876543",
+      "companyStreet": "Bahnhofstraße 5",
+      "companyZipCity": "30159 Hannover",
+      "companyOwner": "Maria Eleganz",
+      "examNumber": "1001",
+      "trainingStart": "01.08.2021",
+      "trainingEnd": "31.07.2024",
+      "examDate1": "15.03.2023",
+      "examDate2": "20.06.2024",
+      "elective": "Kosmetik",
+      "isActive": true
+    },
+    {
+      "id": "s2",
+      "firstName": "Maximilian",
+      "lastName": "Weber",
+      "gender": "Herr",
+      "dob": "22.07.2000",
+      "birthPlace": "Braunschweig",
+      "birthCountry": "Deutschland",
+      "street": "Hauptstraße",
+      "houseNumber": "45",
+      "zip": "38100",
+      "city": "Braunschweig",
+      "email": "max.weber@email.de",
+      "mobile": "0171-2345678",
+      "company": "Friseur Fischer",
+      "companyPhone": "0531-1234567",
+      "companyStreet": "Marktplatz 3",
+      "companyZipCity": "38100 Braunschweig",
+      "companyOwner": "Peter Fischer",
+      "examNumber": "1002",
+      "trainingStart": "01.08.2021",
+      "trainingEnd": "31.07.2024",
+      "examDate1": "15.03.2023",
+      "examDate2": "20.06.2024",
+      "elective": "Coloration",
+      "isActive": true
+    },
+    {
+      "id": "s3",
+      "firstName": "Sophie",
+      "lastName": "Müller",
+      "gender": "Frau",
+      "dob": "10.11.1998",
+      "birthPlace": "Oldenburg",
+      "birthCountry": "Deutschland",
+      "street": "Gartenweg",
+      "houseNumber": "8",
+      "zip": "26122",
+      "city": "Oldenburg",
+      "email": "sophie.mueller@email.de",
+      "mobile": "0172-3456789",
+      "company": "Schnittwerk",
+      "companyPhone": "0441-9876543",
+      "companyStreet": "Lange Straße 22",
+      "companyZipCity": "26122 Oldenburg",
+      "companyOwner": "Julia Schnitt",
+      "examNumber": "1003",
+      "trainingStart": "01.08.2021",
+      "trainingEnd": "31.07.2024",
+      "examDate1": "15.03.2023",
+      "examDate2": "20.06.2024",
+      "elective": "Langhaarfrisuren",
+      "isActive": true
+    },
+    {
+      "id": "s4",
+      "firstName": "Leon",
+      "lastName": "Schmidt",
+      "gender": "Herr",
+      "dob": "05.01.2001",
+      "birthPlace": "Osnabrück",
+      "birthCountry": "Deutschland",
+      "street": "Waldstraße",
+      "houseNumber": "17",
+      "zip": "49074",
+      "city": "Osnabrück",
+      "email": "leon.schmidt@email.de",
+      "mobile": "0173-4567890",
+      "company": "Barber Bros",
+      "companyPhone": "0541-5678901",
+      "companyStreet": "Neumarkt 11",
+      "companyZipCity": "49074 Osnabrück",
+      "companyOwner": "Kai Barber",
+      "examNumber": "1004",
+      "trainingStart": "01.08.2022",
+      "trainingEnd": "31.07.2025",
+      "examDate1": "15.03.2024",
+      "examDate2": "",
+      "elective": "Haarersatz",
+      "isActive": true
+    },
+    {
+      "id": "s5",
+      "firstName": "Emma",
+      "lastName": "Hoffmann",
+      "gender": "Frau",
+      "dob": "28.09.2000",
+      "birthPlace": "Göttingen",
+      "birthCountry": "Deutschland",
+      "street": "Rosenweg",
+      "houseNumber": "3",
+      "zip": "37073",
+      "city": "Göttingen",
+      "email": "emma.hoffmann@email.de",
+      "mobile": "0174-5678901",
+      "company": "Traumhaar",
+      "companyPhone": "0551-2345678",
+      "companyStreet": "Weender Straße 44",
+      "companyZipCity": "37073 Göttingen",
+      "companyOwner": "Lisa Traum",
+      "examNumber": "1005",
+      "trainingStart": "01.08.2021",
+      "trainingEnd": "31.07.2024",
+      "examDate1": "15.03.2023",
+      "examDate2": "20.06.2024",
+      "elective": "Nageldesign/-modelage",
+      "isActive": false
+    },
+    {
+      "id": "s6",
+      "firstName": "Lena",
+      "lastName": "Becker",
+      "gender": "Frau",
+      "dob": "12.04.2001",
+      "birthPlace": "Celle",
+      "birthCountry": "Deutschland",
+      "street": "Schloßplatz",
+      "houseNumber": "28",
+      "zip": "29221",
+      "city": "Celle",
+      "email": "lena.becker@email.de",
+      "mobile": "0178-2278435",
+      "company": "Haaratelier Becker",
+      "companyPhone": "05141-123456",
+      "companyStreet": "Schloßplatz 7",
+      "companyZipCity": "29221 Celle",
+      "companyOwner": "Petra Becker",
+      "examNumber": "1006",
+      "trainingStart": "01.08.2021",
+      "trainingEnd": "31.07.2024",
+      "examDate1": "15.03.2023",
+      "examDate2": "20.06.2024",
+      "elective": "Kosmetik",
+      "isActive": true
+    },
+    {
+      "id": "s7",
+      "firstName": "Tim",
+      "lastName": "Koch",
+      "gender": "Herr",
+      "dob": "30.08.2000",
+      "birthPlace": "Lüneburg",
+      "birthCountry": "Deutschland",
+      "street": "Am Sande",
+      "houseNumber": "35",
+      "zip": "21335",
+      "city": "Lüneburg",
+      "email": "tim.koch@email.de",
+      "mobile": "0176-8590433",
+      "company": "Barber House",
+      "companyPhone": "04131-234567",
+      "companyStreet": "Am Sande 15",
+      "companyZipCity": "21335 Lüneburg",
+      "companyOwner": "Frank Koch",
+      "examNumber": "1007",
+      "trainingStart": "01.08.2021",
+      "trainingEnd": "31.07.2024",
+      "examDate1": "15.03.2023",
+      "examDate2": "20.06.2024",
+      "elective": "Coloration",
+      "isActive": true
+    },
+    {
+      "id": "s8",
+      "firstName": "Laura",
+      "lastName": "Richter",
+      "gender": "Frau",
+      "dob": "17.06.1999",
+      "birthPlace": "Wolfsburg",
+      "birthCountry": "Deutschland",
+      "street": "Porschestr.",
+      "houseNumber": "43",
+      "zip": "38440",
+      "city": "Wolfsburg",
+      "email": "laura.richter@email.de",
+      "mobile": "0175-3883220",
+      "company": "Hair & Beauty",
+      "companyPhone": "05361-345678",
+      "companyStreet": "Porschestr. 22",
+      "companyZipCity": "38440 Wolfsburg",
+      "companyOwner": "Karin Richter",
+      "examNumber": "1008",
+      "trainingStart": "01.08.2021",
+      "trainingEnd": "31.07.2024",
+      "examDate1": "15.03.2023",
+      "examDate2": "20.06.2024",
+      "elective": "Langhaarfrisuren",
+      "isActive": true
+    },
+    {
+      "id": "s9",
+      "firstName": "Niklas",
+      "lastName": "Wolf",
+      "gender": "Herr",
+      "dob": "03.12.2000",
+      "birthPlace": "Hildesheim",
+      "birthCountry": "Deutschland",
+      "street": "Hoher Weg",
+      "houseNumber": "29",
+      "zip": "31134",
+      "city": "Hildesheim",
+      "email": "niklas.wolf@email.de",
+      "mobile": "0178-5257998",
+      "company": "Gentlemen's Cut",
+      "companyPhone": "05121-456789",
+      "companyStreet": "Hoher Weg 3",
+      "companyZipCity": "31134 Hildesheim",
+      "companyOwner": "Jens Wolf",
+      "examNumber": "1009",
+      "trainingStart": "01.08.2021",
+      "trainingEnd": "31.07.2024",
+      "examDate1": "15.03.2023",
+      "examDate2": "20.06.2024",
+      "elective": "Haarersatz",
+      "isActive": true
+    },
+    {
+      "id": "s10",
+      "firstName": "Marie",
+      "lastName": "Schäfer",
+      "gender": "Frau",
+      "dob": "25.02.2001",
+      "birthPlace": "Salzgitter",
+      "birthCountry": "Deutschland",
+      "street": "Berliner Str.",
+      "houseNumber": "40",
+      "zip": "38226",
+      "city": "Salzgitter",
+      "email": "marie.schaefer@email.de",
+      "mobile": "0170-3259131",
+      "company": "Salon Marie",
+      "companyPhone": "05341-567890",
+      "companyStreet": "Berliner Str. 12",
+      "companyZipCity": "38226 Salzgitter",
+      "companyOwner": "Marie Schäfer Sr.",
+      "examNumber": "1010",
+      "trainingStart": "01.08.2021",
+      "trainingEnd": "31.07.2024",
+      "examDate1": "15.03.2023",
+      "examDate2": "20.06.2024",
+      "elective": "Nageldesign/-modelage",
+      "isActive": true
+    },
+    {
+      "id": "s11",
+      "firstName": "Felix",
+      "lastName": "Jung",
+      "gender": "Herr",
+      "dob": "14.09.2000",
+      "birthPlace": "Hameln",
+      "birthCountry": "Deutschland",
+      "street": "Bäckerstr.",
+      "houseNumber": "16",
+      "zip": "31785",
+      "city": "Hameln",
+      "email": "felix.jung@email.de",
+      "mobile": "0179-9770010",
+      "company": "Style Factory",
+      "companyPhone": "05151-678901",
+      "companyStreet": "Bäckerstr. 8",
+      "companyZipCity": "31785 Hameln",
+      "companyOwner": "Oliver Jung",
+      "examNumber": "1011",
+      "trainingStart": "01.08.2021",
+      "trainingEnd": "31.07.2024",
+      "examDate1": "15.03.2023",
+      "examDate2": "20.06.2024",
+      "elective": "Coloration",
+      "isActive": true
+    },
+    {
+      "id": "s12",
+      "firstName": "Jessica",
+      "lastName": "Krüger",
+      "gender": "Frau",
+      "dob": "08.07.2001",
+      "birthPlace": "Peine",
+      "birthCountry": "Deutschland",
+      "street": "Breite Str.",
+      "houseNumber": "32",
+      "zip": "31224",
+      "city": "Peine",
+      "email": "jessica.krueger@email.de",
+      "mobile": "0172-2343351",
+      "company": "Haarwelt Peine",
+      "companyPhone": "05171-789012",
+      "companyStreet": "Breite Str. 5",
+      "companyZipCity": "31224 Peine",
+      "companyOwner": "Simone Krüger",
+      "examNumber": "1012",
+      "trainingStart": "01.08.2021",
+      "trainingEnd": "31.07.2024",
+      "examDate1": "15.03.2023",
+      "examDate2": "20.06.2024",
+      "elective": "Kosmetik",
+      "isActive": true
+    },
+    {
+      "id": "s13",
+      "firstName": "Dennis",
+      "lastName": "Vogel",
+      "gender": "Herr",
+      "dob": "19.11.2000",
+      "birthPlace": "Emden",
+      "birthCountry": "Deutschland",
+      "street": "Neutorstr.",
+      "houseNumber": "27",
+      "zip": "26721",
+      "city": "Emden",
+      "email": "dennis.vogel@email.de",
+      "mobile": "0176-2919164",
+      "company": "Friseur am Hafen",
+      "companyPhone": "04921-890123",
+      "companyStreet": "Neutorstr. 14",
+      "companyZipCity": "26721 Emden",
+      "companyOwner": "Karl Vogel",
+      "examNumber": "1013",
+      "trainingStart": "01.08.2021",
+      "trainingEnd": "31.07.2024",
+      "examDate1": "15.03.2023",
+      "examDate2": "20.06.2024",
+      "elective": "Haarersatz",
+      "isActive": true
+    },
+    {
+      "id": "s14",
+      "firstName": "Vanessa",
+      "lastName": "Frank",
+      "gender": "Frau",
+      "dob": "02.05.2001",
+      "birthPlace": "Lingen",
+      "birthCountry": "Deutschland",
+      "street": "Marienstr.",
+      "houseNumber": "2",
+      "zip": "49808",
+      "city": "Lingen",
+      "email": "vanessa.frank@email.de",
+      "mobile": "0171-5878529",
+      "company": "Beauty Corner",
+      "companyPhone": "0591-901234",
+      "companyStreet": "Marienstr. 9",
+      "companyZipCity": "49808 Lingen",
+      "companyOwner": "Andrea Frank",
+      "examNumber": "1014",
+      "trainingStart": "01.08.2021",
+      "trainingEnd": "31.07.2024",
+      "examDate1": "15.03.2023",
+      "examDate2": "20.06.2024",
+      "elective": "Langhaarfrisuren",
+      "isActive": true
+    },
+    {
+      "id": "s15",
+      "firstName": "Kevin",
+      "lastName": "Scholz",
+      "gender": "Herr",
+      "dob": "27.01.2000",
+      "birthPlace": "Nordhorn",
+      "birthCountry": "Deutschland",
+      "street": "Hauptstr.",
+      "houseNumber": "30",
+      "zip": "48529",
+      "city": "Nordhorn",
+      "email": "kevin.scholz@email.de",
+      "mobile": "0172-5893934",
+      "company": "Men's Style",
+      "companyPhone": "05921-012345",
+      "companyStreet": "Hauptstr. 33",
+      "companyZipCity": "48529 Nordhorn",
+      "companyOwner": "Michael Scholz",
+      "examNumber": "1015",
+      "trainingStart": "01.08.2021",
+      "trainingEnd": "31.07.2024",
+      "examDate1": "15.03.2023",
+      "examDate2": "20.06.2024",
+      "elective": "Coloration",
+      "isActive": true
+    },
+    {
+      "id": "s16",
+      "firstName": "Sarah",
+      "lastName": "Zimmermann",
+      "gender": "Frau",
+      "dob": "11.03.2001",
+      "birthPlace": "Cuxhaven",
+      "birthCountry": "Deutschland",
+      "street": "Deichstr.",
+      "houseNumber": "27",
+      "zip": "27472",
+      "city": "Cuxhaven",
+      "email": "sarah.zimmermann@email.de",
+      "mobile": "0176-3389378",
+      "company": "Strand Friseur",
+      "companyPhone": "04721-112233",
+      "companyStreet": "Deichstr. 18",
+      "companyZipCity": "27472 Cuxhaven",
+      "companyOwner": "Heike Zimmermann",
+      "examNumber": "1016",
+      "trainingStart": "01.08.2021",
+      "trainingEnd": "31.07.2024",
+      "examDate1": "15.03.2023",
+      "examDate2": "20.06.2024",
+      "elective": "Kosmetik",
+      "isActive": true
+    },
+    {
+      "id": "s17",
+      "firstName": "Lukas",
+      "lastName": "Braun",
+      "gender": "Herr",
+      "dob": "06.10.2000",
+      "birthPlace": "Stade",
+      "birthCountry": "Deutschland",
+      "street": "Pferdemarkt",
+      "houseNumber": "23",
+      "zip": "21682",
+      "city": "Stade",
+      "email": "lukas.braun@email.de",
+      "mobile": "0177-5397713",
+      "company": "Cut & Style",
+      "companyPhone": "04141-223344",
+      "companyStreet": "Pferdemarkt 6",
+      "companyZipCity": "21682 Stade",
+      "companyOwner": "Thomas Braun Jr.",
+      "examNumber": "1017",
+      "trainingStart": "01.08.2021",
+      "trainingEnd": "31.07.2024",
+      "examDate1": "15.03.2023",
+      "examDate2": "20.06.2024",
+      "elective": "Coloration",
+      "isActive": true
+    },
+    {
+      "id": "s18",
+      "firstName": "Julia",
+      "lastName": "Hartmann",
+      "gender": "Frau",
+      "dob": "20.08.1999",
+      "birthPlace": "Uelzen",
+      "birthCountry": "Deutschland",
+      "street": "Veerßer Str.",
+      "houseNumber": "42",
+      "zip": "29525",
+      "city": "Uelzen",
+      "email": "julia.hartmann@email.de",
+      "mobile": "0174-8247530",
+      "company": "Haar Oase",
+      "companyPhone": "0581-334455",
+      "companyStreet": "Veerßer Str. 11",
+      "companyZipCity": "29525 Uelzen",
+      "companyOwner": "Renate Hartmann",
+      "examNumber": "1018",
+      "trainingStart": "01.08.2021",
+      "trainingEnd": "31.07.2024",
+      "examDate1": "15.03.2023",
+      "examDate2": "20.06.2024",
+      "elective": "Nageldesign/-modelage",
+      "isActive": true
+    },
+    {
+      "id": "s19",
+      "firstName": "Marvin",
+      "lastName": "Lange",
+      "gender": "Herr",
+      "dob": "15.06.2001",
+      "birthPlace": "Verden",
+      "birthCountry": "Deutschland",
+      "street": "Große Str.",
+      "houseNumber": "28",
+      "zip": "27283",
+      "city": "Verden",
+      "email": "marvin.lange@email.de",
+      "mobile": "0173-6621571",
+      "company": "Barber Lounge",
+      "companyPhone": "04231-445566",
+      "companyStreet": "Große Str. 20",
+      "companyZipCity": "27283 Verden",
+      "companyOwner": "Stefan Lange",
+      "examNumber": "1019",
+      "trainingStart": "01.08.2021",
+      "trainingEnd": "31.07.2024",
+      "examDate1": "15.03.2023",
+      "examDate2": "20.06.2024",
+      "elective": "Haarersatz",
+      "isActive": true
+    },
+    {
+      "id": "s20",
+      "firstName": "Alina",
+      "lastName": "Werner",
+      "gender": "Frau",
+      "dob": "09.01.2000",
+      "birthPlace": "Nienburg",
+      "birthCountry": "Deutschland",
+      "street": "Lange Str.",
+      "houseNumber": "2",
+      "zip": "31582",
+      "city": "Nienburg",
+      "email": "alina.werner@email.de",
+      "mobile": "0173-4289249",
+      "company": "Glamour Hair",
+      "companyPhone": "05021-556677",
+      "companyStreet": "Lange Str. 14",
+      "companyZipCity": "31582 Nienburg",
+      "companyOwner": "Claudia Werner",
+      "examNumber": "1020",
+      "trainingStart": "01.08.2021",
+      "trainingEnd": "31.07.2024",
+      "examDate1": "15.03.2023",
+      "examDate2": "20.06.2024",
+      "elective": "Langhaarfrisuren",
+      "isActive": true
+    }
+  ],
+  "sheets": [
+    {
+      "id": "part1",
+      "name": "Teil 1 der Gesellenprüfung",
+      "part": 1,
+      "workTaskWeight": 0.7,
+      "examPieceWeight": 0.3,
+      "tasks": [
+        {
+          "id": "p1_t1",
+          "name": "Haar und Kopfhaut beurteilen, reinigen und pflegen",
+          "maxPoints": 100,
+          "weight": 0.05
+        },
+        {
+          "id": "p1_t2",
+          "name": "Augenbrauen formen und färben",
+          "maxPoints": 100,
+          "weight": 0.05
+        },
+        {
+          "id": "p1_t3",
+          "name": "Haare mit verschiedenen Techniken dauerwellen",
+          "maxPoints": 100,
+          "weight": 0.2
+        },
+        {
+          "id": "p1_t4",
+          "name": "Haare mit klassischen Techniken schneiden",
+          "maxPoints": 100,
+          "weight": 0.4
+        },
+        {
+          "id": "p1_t5",
+          "name": "Frisurengestaltung mit zwei verschiedenen Einlegetechniken",
+          "maxPoints": 100,
+          "weight": 0.1
+        },
+        {
+          "id": "p1_t6",
+          "name": "Arbeitsschutz und Kundenbetreuung (Situativ)",
+          "maxPoints": 100,
+          "weight": 0.2
+        }
+      ],
+      "examPiece": {
+        "id": "p1_ep",
+        "name": "Klassische Friseurarbeit am Herren",
+        "maxPoints": 100,
+        "weight": 0.3,
+        "enabled": true
+      }
+    },
+    {
+      "id": "part2",
+      "name": "Teil 2 der Gesellenprüfung",
+      "part": 2,
+      "workTaskWeight": 0.7,
+      "examPieceWeight": 0.3,
+      "tasks": [
+        {
+          "id": "p2_t1",
+          "name": "Beratungsgespräch",
+          "maxPoints": 100,
+          "weight": 0.05
+        },
+        {
+          "id": "p2_t2",
+          "name": "Modische Haarfarbe",
+          "maxPoints": 100,
+          "weight": 0.25
+        },
+        {
+          "id": "p2_t3",
+          "name": "Modischer Damenhaarschnitt",
+          "maxPoints": 100,
+          "weight": 0.4
+        },
+        {
+          "id": "p2_t4",
+          "name": "Modische Föhnfrisur mit verschiedenen Techniken",
+          "maxPoints": 100,
+          "weight": 0.05
+        },
+        {
+          "id": "p2_t5",
+          "name": "Kosmetische Behandlung / Make-up",
+          "maxPoints": 100,
+          "weight": 0.05
+        },
+        {
+          "id": "p2_t6",
+          "name": "Wahlqualifikation",
+          "maxPoints": 100,
+          "weight": 0.2
+        }
+      ],
+      "examPiece": {
+        "id": "p2_ep",
+        "name": "Modische Friseurarbeit am Herren",
+        "maxPoints": 100,
+        "weight": 0.3,
+        "enabled": true
+      },
+      "theorySubjects": [
+        {
+          "id": "th1",
+          "name": "Friseurtechniken",
+          "maxPoints": 100,
+          "writtenWeight": 2,
+          "oralWeight": 1
+        },
+        {
+          "id": "th2",
+          "name": "Betriebsorganisation und Kundenmanagement",
+          "maxPoints": 100,
+          "writtenWeight": 2,
+          "oralWeight": 1
+        },
+        {
+          "id": "th3",
+          "name": "Wirtschafts- und Sozialkunde",
+          "maxPoints": 100,
+          "writtenWeight": 2,
+          "oralWeight": 1
+        }
+      ]
+    }
+  ],
+  "grades": [
+    {
+      "studentId": "s1",
+      "sheetId": "part1",
+      "date": "15.03.2023",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_t1": 95,
+            "p1_t2": 90,
+            "p1_t3": 93,
+            "p1_t4": 96,
+            "p1_t5": 88,
+            "p1_t6": 91
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_t1": 92,
+            "p1_t2": 93,
+            "p1_t3": 95,
+            "p1_t4": 94,
+            "p1_t5": 90,
+            "p1_t6": 93
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_t1": 94,
+            "p1_t2": 92,
+            "p1_t3": 91,
+            "p1_t4": 95,
+            "p1_t5": 92,
+            "p1_t6": 90
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_ep": 94
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_ep": 92
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_ep": 95
+          }
+        }
+      ]
+    },
+    {
+      "studentId": "s1",
+      "sheetId": "part2",
+      "date": "20.06.2024",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_t1": 96,
+            "p2_t2": 92,
+            "p2_t3": 95,
+            "p2_t4": 94,
+            "p2_t5": 90,
+            "p2_t6": 93
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_t1": 94,
+            "p2_t2": 90,
+            "p2_t3": 93,
+            "p2_t4": 96,
+            "p2_t5": 92,
+            "p2_t6": 95
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_t1": 95,
+            "p2_t2": 94,
+            "p2_t3": 96,
+            "p2_t4": 92,
+            "p2_t5": 88,
+            "p2_t6": 91
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_ep": 95
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_ep": 93
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_ep": 96
+          }
+        }
+      ],
+      "theoryScores": [
+        {
+          "subjectId": "th1",
+          "writtenPoints": 92,
+          "oralPoints": 0
+        },
+        {
+          "subjectId": "th2",
+          "writtenPoints": 88,
+          "oralPoints": 92
+        },
+        {
+          "subjectId": "th3",
+          "writtenPoints": 85,
+          "oralPoints": 0
+        }
+      ]
+    },
+    {
+      "studentId": "s2",
+      "sheetId": "part1",
+      "date": "15.03.2023",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_t1": 85,
+            "p1_t2": 80,
+            "p1_t3": 87,
+            "p1_t4": 90,
+            "p1_t5": 82,
+            "p1_t6": 84
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_t1": 88,
+            "p1_t2": 84,
+            "p1_t3": 83,
+            "p1_t4": 88,
+            "p1_t5": 80,
+            "p1_t6": 86
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_t1": 82,
+            "p1_t2": 86,
+            "p1_t3": 85,
+            "p1_t4": 86,
+            "p1_t5": 84,
+            "p1_t6": 82
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_ep": 86
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_ep": 84
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_ep": 88
+          }
+        }
+      ]
+    },
+    {
+      "studentId": "s2",
+      "sheetId": "part2",
+      "date": "20.06.2024",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_t1": 86,
+            "p2_t2": 82,
+            "p2_t3": 88,
+            "p2_t4": 84,
+            "p2_t5": 80,
+            "p2_t6": 84
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_t1": 84,
+            "p2_t2": 80,
+            "p2_t3": 86,
+            "p2_t4": 86,
+            "p2_t5": 82,
+            "p2_t6": 86
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_t1": 88,
+            "p2_t2": 84,
+            "p2_t3": 84,
+            "p2_t4": 82,
+            "p2_t5": 78,
+            "p2_t6": 82
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_ep": 87
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_ep": 85
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_ep": 89
+          }
+        }
+      ],
+      "theoryScores": [
+        {
+          "subjectId": "th1",
+          "writtenPoints": 82,
+          "oralPoints": 0
+        },
+        {
+          "subjectId": "th2",
+          "writtenPoints": 78,
+          "oralPoints": 82
+        },
+        {
+          "subjectId": "th3",
+          "writtenPoints": 75,
+          "oralPoints": 0
+        }
+      ]
+    },
+    {
+      "studentId": "s3",
+      "sheetId": "part1",
+      "date": "15.03.2023",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_t1": 78,
+            "p1_t2": 72,
+            "p1_t3": 79,
+            "p1_t4": 82,
+            "p1_t5": 74,
+            "p1_t6": 76
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_t1": 75,
+            "p1_t2": 76,
+            "p1_t3": 77,
+            "p1_t4": 78,
+            "p1_t5": 76,
+            "p1_t6": 78
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_t1": 80,
+            "p1_t2": 74,
+            "p1_t3": 75,
+            "p1_t4": 80,
+            "p1_t5": 72,
+            "p1_t6": 74
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_ep": 78
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_ep": 76
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_ep": 80
+          }
+        }
+      ]
+    },
+    {
+      "studentId": "s3",
+      "sheetId": "part2",
+      "date": "20.06.2024",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_t1": 76,
+            "p2_t2": 72,
+            "p2_t3": 78,
+            "p2_t4": 80,
+            "p2_t5": 70,
+            "p2_t6": 74
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_t1": 78,
+            "p2_t2": 70,
+            "p2_t3": 76,
+            "p2_t4": 76,
+            "p2_t5": 72,
+            "p2_t6": 76
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_t1": 74,
+            "p2_t2": 74,
+            "p2_t3": 74,
+            "p2_t4": 78,
+            "p2_t5": 68,
+            "p2_t6": 72
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_ep": 77
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_ep": 75
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_ep": 79
+          }
+        }
+      ],
+      "theoryScores": [
+        {
+          "subjectId": "th1",
+          "writtenPoints": 74,
+          "oralPoints": 0
+        },
+        {
+          "subjectId": "th2",
+          "writtenPoints": 70,
+          "oralPoints": 75
+        },
+        {
+          "subjectId": "th3",
+          "writtenPoints": 68,
+          "oralPoints": 0
+        }
+      ]
+    },
+    {
+      "studentId": "s4",
+      "sheetId": "part1",
+      "date": "15.03.2024",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_t1": 65,
+            "p1_t2": 60,
+            "p1_t3": 67,
+            "p1_t4": 70,
+            "p1_t5": 62,
+            "p1_t6": 64
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_t1": 68,
+            "p1_t2": 64,
+            "p1_t3": 63,
+            "p1_t4": 68,
+            "p1_t5": 60,
+            "p1_t6": 66
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_t1": 62,
+            "p1_t2": 66,
+            "p1_t3": 65,
+            "p1_t4": 66,
+            "p1_t5": 64,
+            "p1_t6": 62
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_ep": 66
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_ep": 64
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_ep": 68
+          }
+        }
+      ]
+    },
+    {
+      "studentId": "s6",
+      "sheetId": "part1",
+      "date": "15.03.2023",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_t1": 71,
+            "p1_t2": 74,
+            "p1_t3": 74,
+            "p1_t4": 67,
+            "p1_t5": 69,
+            "p1_t6": 69
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_t1": 69,
+            "p1_t2": 71,
+            "p1_t3": 68,
+            "p1_t4": 77,
+            "p1_t5": 72,
+            "p1_t6": 71
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_t1": 73,
+            "p1_t2": 72,
+            "p1_t3": 72,
+            "p1_t4": 73,
+            "p1_t5": 73,
+            "p1_t6": 73
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_ep": 73
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_ep": 71
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_ep": 71
+          }
+        }
+      ]
+    },
+    {
+      "studentId": "s6",
+      "sheetId": "part2",
+      "date": "20.06.2024",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_t1": 76,
+            "p2_t2": 68,
+            "p2_t3": 70,
+            "p2_t4": 69,
+            "p2_t5": 73,
+            "p2_t6": 77
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_t1": 67,
+            "p2_t2": 69,
+            "p2_t3": 76,
+            "p2_t4": 70,
+            "p2_t5": 75,
+            "p2_t6": 69
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_t1": 76,
+            "p2_t2": 76,
+            "p2_t3": 76,
+            "p2_t4": 68,
+            "p2_t5": 74,
+            "p2_t6": 71
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_ep": 70
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_ep": 70
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_ep": 72
+          }
+        }
+      ],
+      "theoryScores": [
+        {
+          "subjectId": "th1",
+          "writtenPoints": 70,
+          "oralPoints": 0
+        },
+        {
+          "subjectId": "th2",
+          "writtenPoints": 71,
+          "oralPoints": 74
+        },
+        {
+          "subjectId": "th3",
+          "writtenPoints": 68,
+          "oralPoints": 0
+        }
+      ]
+    },
+    {
+      "studentId": "s7",
+      "sheetId": "part1",
+      "date": "15.03.2023",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_t1": 67,
+            "p1_t2": 64,
+            "p1_t3": 71,
+            "p1_t4": 68,
+            "p1_t5": 66,
+            "p1_t6": 70
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_t1": 67,
+            "p1_t2": 66,
+            "p1_t3": 71,
+            "p1_t4": 68,
+            "p1_t5": 66,
+            "p1_t6": 65
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_t1": 64,
+            "p1_t2": 70,
+            "p1_t3": 70,
+            "p1_t4": 65,
+            "p1_t5": 68,
+            "p1_t6": 68
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_ep": 68
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_ep": 65
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_ep": 64
+          }
+        }
+      ]
+    },
+    {
+      "studentId": "s7",
+      "sheetId": "part2",
+      "date": "20.06.2024",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_t1": 65,
+            "p2_t2": 66,
+            "p2_t3": 66,
+            "p2_t4": 66,
+            "p2_t5": 65,
+            "p2_t6": 71
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_t1": 66,
+            "p2_t2": 70,
+            "p2_t3": 67,
+            "p2_t4": 69,
+            "p2_t5": 69,
+            "p2_t6": 67
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_t1": 64,
+            "p2_t2": 65,
+            "p2_t3": 67,
+            "p2_t4": 65,
+            "p2_t5": 71,
+            "p2_t6": 72
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_ep": 70
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_ep": 65
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_ep": 65
+          }
+        }
+      ],
+      "theoryScores": [
+        {
+          "subjectId": "th1",
+          "writtenPoints": 66,
+          "oralPoints": 0
+        },
+        {
+          "subjectId": "th2",
+          "writtenPoints": 67,
+          "oralPoints": 69
+        },
+        {
+          "subjectId": "th3",
+          "writtenPoints": 63,
+          "oralPoints": 0
+        }
+      ]
+    },
+    {
+      "studentId": "s8",
+      "sheetId": "part1",
+      "date": "15.03.2023",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_t1": 62,
+            "p1_t2": 59,
+            "p1_t3": 66,
+            "p1_t4": 57,
+            "p1_t5": 65,
+            "p1_t6": 64
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_t1": 63,
+            "p1_t2": 66,
+            "p1_t3": 67,
+            "p1_t4": 65,
+            "p1_t5": 62,
+            "p1_t6": 57
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_t1": 61,
+            "p1_t2": 62,
+            "p1_t3": 63,
+            "p1_t4": 58,
+            "p1_t5": 63,
+            "p1_t6": 66
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_ep": 65
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_ep": 62
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_ep": 61
+          }
+        }
+      ]
+    },
+    {
+      "studentId": "s8",
+      "sheetId": "part2",
+      "date": "20.06.2024",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_t1": 63,
+            "p2_t2": 58,
+            "p2_t3": 63,
+            "p2_t4": 65,
+            "p2_t5": 66,
+            "p2_t6": 65
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_t1": 63,
+            "p2_t2": 62,
+            "p2_t3": 66,
+            "p2_t4": 63,
+            "p2_t5": 61,
+            "p2_t6": 61
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_t1": 60,
+            "p2_t2": 63,
+            "p2_t3": 64,
+            "p2_t4": 62,
+            "p2_t5": 57,
+            "p2_t6": 59
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_ep": 60
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_ep": 60
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_ep": 60
+          }
+        }
+      ],
+      "theoryScores": [
+        {
+          "subjectId": "th1",
+          "writtenPoints": 63,
+          "oralPoints": 0
+        },
+        {
+          "subjectId": "th2",
+          "writtenPoints": 60,
+          "oralPoints": 66
+        },
+        {
+          "subjectId": "th3",
+          "writtenPoints": 54,
+          "oralPoints": 0
+        }
+      ]
+    },
+    {
+      "studentId": "s9",
+      "sheetId": "part1",
+      "date": "15.03.2023",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_t1": 57,
+            "p1_t2": 55,
+            "p1_t3": 56,
+            "p1_t4": 62,
+            "p1_t5": 59,
+            "p1_t6": 62
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_t1": 59,
+            "p1_t2": 57,
+            "p1_t3": 56,
+            "p1_t4": 55,
+            "p1_t5": 62,
+            "p1_t6": 58
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_t1": 57,
+            "p1_t2": 58,
+            "p1_t3": 57,
+            "p1_t4": 60,
+            "p1_t5": 58,
+            "p1_t6": 56
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_ep": 62
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_ep": 60
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_ep": 55
+          }
+        }
+      ]
+    },
+    {
+      "studentId": "s9",
+      "sheetId": "part2",
+      "date": "20.06.2024",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_t1": 60,
+            "p2_t2": 56,
+            "p2_t3": 61,
+            "p2_t4": 61,
+            "p2_t5": 61,
+            "p2_t6": 60
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_t1": 55,
+            "p2_t2": 57,
+            "p2_t3": 59,
+            "p2_t4": 59,
+            "p2_t5": 57,
+            "p2_t6": 61
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_t1": 55,
+            "p2_t2": 56,
+            "p2_t3": 62,
+            "p2_t4": 55,
+            "p2_t5": 61,
+            "p2_t6": 57
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_ep": 58
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_ep": 57
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_ep": 58
+          }
+        }
+      ],
+      "theoryScores": [
+        {
+          "subjectId": "th1",
+          "writtenPoints": 56,
+          "oralPoints": 0
+        },
+        {
+          "subjectId": "th2",
+          "writtenPoints": 54,
+          "oralPoints": 62
+        },
+        {
+          "subjectId": "th3",
+          "writtenPoints": 50,
+          "oralPoints": 0
+        }
+      ]
+    },
+    {
+      "studentId": "s10",
+      "sheetId": "part1",
+      "date": "15.03.2023",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_t1": 76,
+            "p1_t2": 75,
+            "p1_t3": 79,
+            "p1_t4": 71,
+            "p1_t5": 73,
+            "p1_t6": 77
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_t1": 71,
+            "p1_t2": 76,
+            "p1_t3": 74,
+            "p1_t4": 73,
+            "p1_t5": 79,
+            "p1_t6": 72
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_t1": 79,
+            "p1_t2": 70,
+            "p1_t3": 75,
+            "p1_t4": 76,
+            "p1_t5": 79,
+            "p1_t6": 79
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_ep": 70
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_ep": 72
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_ep": 71
+          }
+        }
+      ]
+    },
+    {
+      "studentId": "s10",
+      "sheetId": "part2",
+      "date": "20.06.2024",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_t1": 75,
+            "p2_t2": 71,
+            "p2_t3": 76,
+            "p2_t4": 74,
+            "p2_t5": 73,
+            "p2_t6": 72
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_t1": 79,
+            "p2_t2": 75,
+            "p2_t3": 77,
+            "p2_t4": 80,
+            "p2_t5": 73,
+            "p2_t6": 77
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_t1": 72,
+            "p2_t2": 73,
+            "p2_t3": 77,
+            "p2_t4": 74,
+            "p2_t5": 74,
+            "p2_t6": 80
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_ep": 75
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_ep": 72
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_ep": 76
+          }
+        }
+      ],
+      "theoryScores": [
+        {
+          "subjectId": "th1",
+          "writtenPoints": 72,
+          "oralPoints": 0
+        },
+        {
+          "subjectId": "th2",
+          "writtenPoints": 72,
+          "oralPoints": 74
+        },
+        {
+          "subjectId": "th3",
+          "writtenPoints": 71,
+          "oralPoints": 0
+        }
+      ]
+    },
+    {
+      "studentId": "s11",
+      "sheetId": "part1",
+      "date": "15.03.2023",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_t1": 58,
+            "p1_t2": 58,
+            "p1_t3": 54,
+            "p1_t4": 51,
+            "p1_t5": 56,
+            "p1_t6": 56
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_t1": 57,
+            "p1_t2": 55,
+            "p1_t3": 58,
+            "p1_t4": 55,
+            "p1_t5": 59,
+            "p1_t6": 57
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_t1": 54,
+            "p1_t2": 56,
+            "p1_t3": 57,
+            "p1_t4": 55,
+            "p1_t5": 56,
+            "p1_t6": 59
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_ep": 57
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_ep": 56
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_ep": 55
+          }
+        }
+      ]
+    },
+    {
+      "studentId": "s11",
+      "sheetId": "part2",
+      "date": "20.06.2024",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_t1": 59,
+            "p2_t2": 57,
+            "p2_t3": 54,
+            "p2_t4": 57,
+            "p2_t5": 51,
+            "p2_t6": 53
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_t1": 57,
+            "p2_t2": 55,
+            "p2_t3": 57,
+            "p2_t4": 57,
+            "p2_t5": 57,
+            "p2_t6": 52
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_t1": 53,
+            "p2_t2": 58,
+            "p2_t3": 59,
+            "p2_t4": 52,
+            "p2_t5": 56,
+            "p2_t6": 54
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_ep": 56
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_ep": 53
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_ep": 51
+          }
+        }
+      ],
+      "theoryScores": [
+        {
+          "subjectId": "th1",
+          "writtenPoints": 55,
+          "oralPoints": 0
+        },
+        {
+          "subjectId": "th2",
+          "writtenPoints": 56,
+          "oralPoints": 59
+        },
+        {
+          "subjectId": "th3",
+          "writtenPoints": 47,
+          "oralPoints": 0
+        }
+      ]
+    },
+    {
+      "studentId": "s12",
+      "sheetId": "part1",
+      "date": "15.03.2023",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_t1": 43,
+            "p1_t2": 40,
+            "p1_t3": 45,
+            "p1_t4": 42,
+            "p1_t5": 45,
+            "p1_t6": 44
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_t1": 40,
+            "p1_t2": 46,
+            "p1_t3": 42,
+            "p1_t4": 43,
+            "p1_t5": 38,
+            "p1_t6": 43
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_t1": 39,
+            "p1_t2": 46,
+            "p1_t3": 42,
+            "p1_t4": 45,
+            "p1_t5": 45,
+            "p1_t6": 45
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_ep": 44
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_ep": 47
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_ep": 44
+          }
+        }
+      ]
+    },
+    {
+      "studentId": "s12",
+      "sheetId": "part2",
+      "date": "20.06.2024",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_t1": 46,
+            "p2_t2": 37,
+            "p2_t3": 45,
+            "p2_t4": 39,
+            "p2_t5": 42,
+            "p2_t6": 39
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_t1": 44,
+            "p2_t2": 42,
+            "p2_t3": 38,
+            "p2_t4": 43,
+            "p2_t5": 43,
+            "p2_t6": 43
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_t1": 40,
+            "p2_t2": 40,
+            "p2_t3": 44,
+            "p2_t4": 44,
+            "p2_t5": 46,
+            "p2_t6": 39
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_ep": 46
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_ep": 43
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_ep": 43
+          }
+        }
+      ],
+      "theoryScores": [
+        {
+          "subjectId": "th1",
+          "writtenPoints": 43,
+          "oralPoints": 0
+        },
+        {
+          "subjectId": "th2",
+          "writtenPoints": 40,
+          "oralPoints": 44
+        },
+        {
+          "subjectId": "th3",
+          "writtenPoints": 35,
+          "oralPoints": 0
+        }
+      ]
+    },
+    {
+      "studentId": "s13",
+      "sheetId": "part1",
+      "date": "15.03.2023",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_t1": 44,
+            "p1_t2": 32,
+            "p1_t3": 33,
+            "p1_t4": 35,
+            "p1_t5": 35,
+            "p1_t6": 35
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_t1": 43,
+            "p1_t2": 35,
+            "p1_t3": 36,
+            "p1_t4": 43,
+            "p1_t5": 42,
+            "p1_t6": 34
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_t1": 44,
+            "p1_t2": 34,
+            "p1_t3": 43,
+            "p1_t4": 36,
+            "p1_t5": 41,
+            "p1_t6": 37
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_ep": 34
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_ep": 35
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_ep": 40
+          }
+        }
+      ]
+    },
+    {
+      "studentId": "s13",
+      "sheetId": "part2",
+      "date": "20.06.2024",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_t1": 40,
+            "p2_t2": 35,
+            "p2_t3": 33,
+            "p2_t4": 32,
+            "p2_t5": 39,
+            "p2_t6": 40
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_t1": 36,
+            "p2_t2": 41,
+            "p2_t3": 40,
+            "p2_t4": 33,
+            "p2_t5": 35,
+            "p2_t6": 40
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_t1": 41,
+            "p2_t2": 43,
+            "p2_t3": 43,
+            "p2_t4": 35,
+            "p2_t5": 35,
+            "p2_t6": 41
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_ep": 44
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_ep": 40
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_ep": 39
+          }
+        }
+      ],
+      "theoryScores": [
+        {
+          "subjectId": "th1",
+          "writtenPoints": 33,
+          "oralPoints": 0
+        },
+        {
+          "subjectId": "th2",
+          "writtenPoints": 36,
+          "oralPoints": 39
+        },
+        {
+          "subjectId": "th3",
+          "writtenPoints": 35,
+          "oralPoints": 0
+        }
+      ]
+    },
+    {
+      "studentId": "s14",
+      "sheetId": "part1",
+      "date": "15.03.2023",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_t1": 48,
+            "p1_t2": 49,
+            "p1_t3": 42,
+            "p1_t4": 47,
+            "p1_t5": 42,
+            "p1_t6": 46
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_t1": 43,
+            "p1_t2": 47,
+            "p1_t3": 46,
+            "p1_t4": 43,
+            "p1_t5": 48,
+            "p1_t6": 43
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_t1": 48,
+            "p1_t2": 44,
+            "p1_t3": 49,
+            "p1_t4": 41,
+            "p1_t5": 48,
+            "p1_t6": 43
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_ep": 46
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_ep": 42
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_ep": 44
+          }
+        }
+      ]
+    },
+    {
+      "studentId": "s14",
+      "sheetId": "part2",
+      "date": "20.06.2024",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_t1": 43,
+            "p2_t2": 45,
+            "p2_t3": 46,
+            "p2_t4": 44,
+            "p2_t5": 48,
+            "p2_t6": 45
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_t1": 41,
+            "p2_t2": 42,
+            "p2_t3": 48,
+            "p2_t4": 44,
+            "p2_t5": 46,
+            "p2_t6": 47
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_t1": 48,
+            "p2_t2": 46,
+            "p2_t3": 42,
+            "p2_t4": 42,
+            "p2_t5": 44,
+            "p2_t6": 43
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_ep": 41
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_ep": 44
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_ep": 42
+          }
+        }
+      ],
+      "theoryScores": [
+        {
+          "subjectId": "th1",
+          "writtenPoints": 47,
+          "oralPoints": 0
+        },
+        {
+          "subjectId": "th2",
+          "writtenPoints": 45,
+          "oralPoints": 46
+        },
+        {
+          "subjectId": "th3",
+          "writtenPoints": 42,
+          "oralPoints": 0
+        }
+      ]
+    },
+    {
+      "studentId": "s15",
+      "sheetId": "part1",
+      "date": "15.03.2023",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_t1": 38,
+            "p1_t2": 38,
+            "p1_t3": 30,
+            "p1_t4": 34,
+            "p1_t5": 37,
+            "p1_t6": 36
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_t1": 35,
+            "p1_t2": 31,
+            "p1_t3": 40,
+            "p1_t4": 39,
+            "p1_t5": 38,
+            "p1_t6": 38
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_t1": 31,
+            "p1_t2": 35,
+            "p1_t3": 39,
+            "p1_t4": 36,
+            "p1_t5": 33,
+            "p1_t6": 35
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_ep": 40
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_ep": 33
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_ep": 32
+          }
+        }
+      ]
+    },
+    {
+      "studentId": "s15",
+      "sheetId": "part2",
+      "date": "20.06.2024",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_t1": 40,
+            "p2_t2": 35,
+            "p2_t3": 35,
+            "p2_t4": 31,
+            "p2_t5": 34,
+            "p2_t6": 36
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_t1": 34,
+            "p2_t2": 39,
+            "p2_t3": 36,
+            "p2_t4": 32,
+            "p2_t5": 36,
+            "p2_t6": 36
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_t1": 30,
+            "p2_t2": 37,
+            "p2_t3": 37,
+            "p2_t4": 37,
+            "p2_t5": 32,
+            "p2_t6": 34
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_ep": 38
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_ep": 30
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_ep": 31
+          }
+        }
+      ],
+      "theoryScores": [
+        {
+          "subjectId": "th1",
+          "writtenPoints": 37,
+          "oralPoints": 0
+        },
+        {
+          "subjectId": "th2",
+          "writtenPoints": 33,
+          "oralPoints": 32
+        },
+        {
+          "subjectId": "th3",
+          "writtenPoints": 26,
+          "oralPoints": 0
+        }
+      ]
+    },
+    {
+      "studentId": "s16",
+      "sheetId": "part1",
+      "date": "15.03.2023",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_t1": 69,
+            "p1_t2": 68,
+            "p1_t3": 66,
+            "p1_t4": 66,
+            "p1_t5": 73,
+            "p1_t6": 70
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_t1": 74,
+            "p1_t2": 72,
+            "p1_t3": 75,
+            "p1_t4": 74,
+            "p1_t5": 66,
+            "p1_t6": 73
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_t1": 65,
+            "p1_t2": 66,
+            "p1_t3": 70,
+            "p1_t4": 67,
+            "p1_t5": 72,
+            "p1_t6": 65
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_ep": 69
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_ep": 73
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_ep": 73
+          }
+        }
+      ]
+    },
+    {
+      "studentId": "s16",
+      "sheetId": "part2",
+      "date": "20.06.2024",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_t1": 71,
+            "p2_t2": 70,
+            "p2_t3": 74,
+            "p2_t4": 70,
+            "p2_t5": 68,
+            "p2_t6": 72
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_t1": 68,
+            "p2_t2": 73,
+            "p2_t3": 66,
+            "p2_t4": 69,
+            "p2_t5": 72,
+            "p2_t6": 73
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_t1": 67,
+            "p2_t2": 75,
+            "p2_t3": 67,
+            "p2_t4": 75,
+            "p2_t5": 73,
+            "p2_t6": 65
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_ep": 67
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_ep": 74
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_ep": 74
+          }
+        }
+      ],
+      "theoryScores": [
+        {
+          "subjectId": "th1",
+          "writtenPoints": 71,
+          "oralPoints": 0
+        },
+        {
+          "subjectId": "th2",
+          "writtenPoints": 66,
+          "oralPoints": 71
+        },
+        {
+          "subjectId": "th3",
+          "writtenPoints": 60,
+          "oralPoints": 0
+        }
+      ]
+    },
+    {
+      "studentId": "s17",
+      "sheetId": "part1",
+      "date": "15.03.2023",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_t1": 67,
+            "p1_t2": 68,
+            "p1_t3": 66,
+            "p1_t4": 64,
+            "p1_t5": 62,
+            "p1_t6": 66
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_t1": 66,
+            "p1_t2": 61,
+            "p1_t3": 66,
+            "p1_t4": 65,
+            "p1_t5": 67,
+            "p1_t6": 65
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_t1": 65,
+            "p1_t2": 61,
+            "p1_t3": 67,
+            "p1_t4": 67,
+            "p1_t5": 69,
+            "p1_t6": 63
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_ep": 62
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_ep": 61
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_ep": 68
+          }
+        }
+      ]
+    },
+    {
+      "studentId": "s17",
+      "sheetId": "part2",
+      "date": "20.06.2024",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_t1": 66,
+            "p2_t2": 68,
+            "p2_t3": 63,
+            "p2_t4": 63,
+            "p2_t5": 68,
+            "p2_t6": 61
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_t1": 66,
+            "p2_t2": 64,
+            "p2_t3": 63,
+            "p2_t4": 66,
+            "p2_t5": 65,
+            "p2_t6": 65
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_t1": 67,
+            "p2_t2": 63,
+            "p2_t3": 65,
+            "p2_t4": 61,
+            "p2_t5": 65,
+            "p2_t6": 68
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_ep": 64
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_ep": 61
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_ep": 64
+          }
+        }
+      ],
+      "theoryScores": [
+        {
+          "subjectId": "th1",
+          "writtenPoints": 61,
+          "oralPoints": 0
+        },
+        {
+          "subjectId": "th2",
+          "writtenPoints": 64,
+          "oralPoints": 67
+        },
+        {
+          "subjectId": "th3",
+          "writtenPoints": 58,
+          "oralPoints": 0
+        }
+      ]
+    },
+    {
+      "studentId": "s18",
+      "sheetId": "part1",
+      "date": "15.03.2023",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_t1": 70,
+            "p1_t2": 69,
+            "p1_t3": 70,
+            "p1_t4": 76,
+            "p1_t5": 75,
+            "p1_t6": 74
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_t1": 69,
+            "p1_t2": 75,
+            "p1_t3": 70,
+            "p1_t4": 76,
+            "p1_t5": 78,
+            "p1_t6": 75
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_t1": 69,
+            "p1_t2": 68,
+            "p1_t3": 78,
+            "p1_t4": 70,
+            "p1_t5": 73,
+            "p1_t6": 75
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_ep": 72
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_ep": 73
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_ep": 77
+          }
+        }
+      ]
+    },
+    {
+      "studentId": "s18",
+      "sheetId": "part2",
+      "date": "20.06.2024",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_t1": 73,
+            "p2_t2": 68,
+            "p2_t3": 70,
+            "p2_t4": 71,
+            "p2_t5": 76,
+            "p2_t6": 68
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_t1": 68,
+            "p2_t2": 70,
+            "p2_t3": 75,
+            "p2_t4": 73,
+            "p2_t5": 70,
+            "p2_t6": 71
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_t1": 69,
+            "p2_t2": 77,
+            "p2_t3": 71,
+            "p2_t4": 76,
+            "p2_t5": 76,
+            "p2_t6": 75
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_ep": 70
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_ep": 74
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_ep": 70
+          }
+        }
+      ],
+      "theoryScores": [
+        {
+          "subjectId": "th1",
+          "writtenPoints": 73,
+          "oralPoints": 0
+        },
+        {
+          "subjectId": "th2",
+          "writtenPoints": 74,
+          "oralPoints": 78
+        },
+        {
+          "subjectId": "th3",
+          "writtenPoints": 69,
+          "oralPoints": 0
+        }
+      ]
+    },
+    {
+      "studentId": "s19",
+      "sheetId": "part1",
+      "date": "15.03.2023",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_t1": 61,
+            "p1_t2": 59,
+            "p1_t3": 58,
+            "p1_t4": 62,
+            "p1_t5": 63,
+            "p1_t6": 64
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_t1": 63,
+            "p1_t2": 57,
+            "p1_t3": 57,
+            "p1_t4": 62,
+            "p1_t5": 62,
+            "p1_t6": 62
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_t1": 62,
+            "p1_t2": 63,
+            "p1_t3": 58,
+            "p1_t4": 58,
+            "p1_t5": 59,
+            "p1_t6": 57
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_ep": 63
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_ep": 56
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_ep": 63
+          }
+        }
+      ]
+    },
+    {
+      "studentId": "s19",
+      "sheetId": "part2",
+      "date": "20.06.2024",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_t1": 59,
+            "p2_t2": 61,
+            "p2_t3": 59,
+            "p2_t4": 59,
+            "p2_t5": 60,
+            "p2_t6": 58
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_t1": 57,
+            "p2_t2": 63,
+            "p2_t3": 60,
+            "p2_t4": 60,
+            "p2_t5": 61,
+            "p2_t6": 63
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_t1": 63,
+            "p2_t2": 58,
+            "p2_t3": 56,
+            "p2_t4": 57,
+            "p2_t5": 56,
+            "p2_t6": 57
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_ep": 63
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_ep": 58
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_ep": 60
+          }
+        }
+      ],
+      "theoryScores": [
+        {
+          "subjectId": "th1",
+          "writtenPoints": 57,
+          "oralPoints": 0
+        },
+        {
+          "subjectId": "th2",
+          "writtenPoints": 57,
+          "oralPoints": 60
+        },
+        {
+          "subjectId": "th3",
+          "writtenPoints": 54,
+          "oralPoints": 0
+        }
+      ]
+    },
+    {
+      "studentId": "s20",
+      "sheetId": "part1",
+      "date": "15.03.2023",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_t1": 65,
+            "p1_t2": 71,
+            "p1_t3": 66,
+            "p1_t4": 66,
+            "p1_t5": 66,
+            "p1_t6": 70
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_t1": 70,
+            "p1_t2": 69,
+            "p1_t3": 62,
+            "p1_t4": 63,
+            "p1_t5": 67,
+            "p1_t6": 71
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_t1": 68,
+            "p1_t2": 69,
+            "p1_t3": 64,
+            "p1_t4": 63,
+            "p1_t5": 63,
+            "p1_t6": 67
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p1_ep": 69
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p1_ep": 70
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p1_ep": 67
+          }
+        }
+      ]
+    },
+    {
+      "studentId": "s20",
+      "sheetId": "part2",
+      "date": "20.06.2024",
+      "examiners": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_t1": 64,
+            "p2_t2": 72,
+            "p2_t3": 69,
+            "p2_t4": 67,
+            "p2_t5": 66,
+            "p2_t6": 63
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_t1": 70,
+            "p2_t2": 68,
+            "p2_t3": 67,
+            "p2_t4": 72,
+            "p2_t5": 63,
+            "p2_t6": 63
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_t1": 71,
+            "p2_t2": 65,
+            "p2_t3": 70,
+            "p2_t4": 67,
+            "p2_t5": 68,
+            "p2_t6": 64
+          }
+        }
+      ],
+      "examPieceExaminers": [
+        {
+          "id": "e1",
+          "name": "Dr. Hans Meier",
+          "scores": {
+            "p2_ep": 69
+          }
+        },
+        {
+          "id": "e2",
+          "name": "Sabine Krause",
+          "scores": {
+            "p2_ep": 63
+          }
+        },
+        {
+          "id": "e3",
+          "name": "Thomas Braun",
+          "scores": {
+            "p2_ep": 70
+          }
+        }
+      ],
+      "theoryScores": [
+        {
+          "subjectId": "th1",
+          "writtenPoints": 64,
+          "oralPoints": 0
+        },
+        {
+          "subjectId": "th2",
+          "writtenPoints": 60,
+          "oralPoints": 65
+        },
+        {
+          "subjectId": "th3",
+          "writtenPoints": 62,
+          "oralPoints": 0
+        }
+      ]
+    }
+  ],
+  "examinerCount": 3,
+  "innung": {
+    "name": "Landesinnungsverband des niedersächsischen Friseurhandwerks",
+    "street": "Ricklinger Stadtweg 92",
+    "zipCity": "30459 Hannover",
+    "phone": "0511 / 42 72 31",
+    "email": "info@liv-friseure-nds.de"
+  },
+  "gradeScale": {
+    "sehrGut": {
+      "min": 92,
+      "max": 100
+    },
+    "gut": {
+      "min": 81,
+      "max": 91
+    },
+    "befriedigend": {
+      "min": 67,
+      "max": 80
+    },
+    "ausreichend": {
+      "min": 50,
+      "max": 66
+    },
+    "mangelhaft": {
+      "min": 30,
+      "max": 49
+    },
+    "ungenuegend": {
+      "min": 0,
+      "max": 29
+    }
+  },
+  "_dataVersion": 4
+}

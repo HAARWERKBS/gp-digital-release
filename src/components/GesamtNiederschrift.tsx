@@ -1,7 +1,7 @@
 import React from 'react';
 import { Page, Text, View, Document, StyleSheet, Image } from '@react-pdf/renderer';
 import { Grade, GradingSheet, Student, Innung } from '../lib/types';
-import { calculateGrade } from '../lib/grading';
+import { calculateGrade, calculateGradeFromPercent, isPassed } from '../lib/grading';
 
 const styles = StyleSheet.create({
     page: {
@@ -299,23 +299,62 @@ export const GesamtNiederschrift: React.FC<GesamtNiederschriftProps> = ({ studen
         part1Total = (part1WorkTaskPoints * sheetPart1.workTaskWeight) + (part1ExamPiecePoints * sheetPart1.examPieceWeight);
     }
 
-    // Calculate Teil 2
+    // Calculate Teil 2: Praxis (60%) + Theorie (40%) gemäß GPO
     let part2WorkTaskPoints = 0;
     let part2ExamPiecePoints = 0;
+    let part2Praxis = 0;
+    let theoryPercent = 0;
+    const theorySubjectGrades: { name: string; percent: number; grade: number }[] = [];
     let part2Total = 0;
+
     if (sheetPart2 && gradePart2) {
+        // Praxis: Arbeitsaufgaben (70%) + Prüfungsstück (30%)
         part2WorkTaskPoints = sheetPart2.tasks.reduce((sum, t) => sum + (getAvgScore(gradePart2, t.id) * t.weight), 0);
         part2ExamPiecePoints = sheetPart2.examPiece ? getExamPieceAvg(gradePart2, sheetPart2.examPiece.id) : 0;
-        part2Total = (part2WorkTaskPoints * sheetPart2.workTaskWeight) + (part2ExamPiecePoints * sheetPart2.examPieceWeight);
+        part2Praxis = (part2WorkTaskPoints * sheetPart2.workTaskWeight) + (part2ExamPiecePoints * sheetPart2.examPieceWeight);
+
+        // Theorie: Schnitt der 3 Fächer (schriftl.×2 + mündl.×1, /3 bzw. /2)
+        if (sheetPart2.theorySubjects && gradePart2.theoryScores) {
+            const subjectPercents: number[] = [];
+            sheetPart2.theorySubjects.forEach(subject => {
+                const score = gradePart2.theoryScores?.find(ts => ts.subjectId === subject.id);
+                if (score) {
+                    const written = score.writtenPoints || 0;
+                    const oral = score.oralPoints || 0;
+                    const subjectPct = oral > 0 ? (written * 2 + oral) / 3 : written;
+                    subjectPercents.push(subjectPct);
+                    theorySubjectGrades.push({
+                        name: subject.name,
+                        percent: subjectPct,
+                        grade: calculateGradeFromPercent(subjectPct).value
+                    });
+                }
+            });
+            if (subjectPercents.length > 0) {
+                theoryPercent = subjectPercents.reduce((a, b) => a + b, 0) / subjectPercents.length;
+            }
+        }
+
+        // Teil 2 Gesamt: Praxis × 0.6 + Theorie × 0.4
+        part2Total = (part2Praxis * 0.6) + (theoryPercent * 0.4);
     }
 
-    // Gesamtergebnis
+    // Gesamtergebnis: Teil 1 (25%) + Teil 2 (75%)
     const totalPoints = (part1Total * 0.25) + (part2Total * 0.75);
-    const passed = totalPoints >= 50;
 
     const part1Grade = calculateGrade(part1Total, 100);
+    const part2PraxisGrade = calculateGrade(part2Praxis, 100);
     const part2Grade = calculateGrade(part2Total, 100);
     const finalGrade = calculateGrade(totalPoints, 100);
+
+    // Sperrfach-Prüfung gemäß GPO: kein Bereich darf Note 6 haben
+    const allPartGrades = [
+        part1Grade.value,
+        part2PraxisGrade.value,
+        ...theorySubjectGrades.map(t => t.grade)
+    ];
+    const passResult = isPassed(finalGrade.value, allPartGrades);
+    const passed = passResult.passed;
 
     // Get all unique examiners
     const isDefaultExaminerName = (name: string) => /^Prüfer\s*\d+$/i.test(name.trim());
@@ -511,8 +550,26 @@ export const GesamtNiederschrift: React.FC<GesamtNiederschriftProps> = ({ studen
                                 <Text style={styles.resultLabel}>Prüfungsstück ({(sheetPart2.examPieceWeight * 100).toFixed(0)}%)</Text>
                                 <Text style={styles.resultValue}>{part2ExamPiecePoints.toFixed(2)} Pkt.</Text>
                             </View>
+                            <View style={styles.resultRow}>
+                                <Text style={[styles.resultLabel, { fontWeight: 'bold' }]}>Praxis gesamt (×0.6)</Text>
+                                <Text style={styles.resultValue}>{part2Praxis.toFixed(2)} × 0.6 = {(part2Praxis * 0.6).toFixed(2)} Pkt.</Text>
+                            </View>
+                            {theorySubjectGrades.length > 0 && (
+                                <>
+                                    {theorySubjectGrades.map((t, idx) => (
+                                        <View key={idx} style={styles.resultRow}>
+                                            <Text style={styles.resultLabel}>{t.name}</Text>
+                                            <Text style={styles.resultValue}>{t.percent.toFixed(2)} Pkt. = Note {t.grade}</Text>
+                                        </View>
+                                    ))}
+                                    <View style={styles.resultRow}>
+                                        <Text style={[styles.resultLabel, { fontWeight: 'bold' }]}>Theorie gesamt (×0.4)</Text>
+                                        <Text style={styles.resultValue}>{theoryPercent.toFixed(2)} × 0.4 = {(theoryPercent * 0.4).toFixed(2)} Pkt.</Text>
+                                    </View>
+                                </>
+                            )}
                             <View style={styles.resultTotalRow}>
-                                <Text style={styles.resultTotalLabel}>Teil 2 Gesamt</Text>
+                                <Text style={styles.resultTotalLabel}>Teil 2 Gesamt (Praxis 60% + Theorie 40%)</Text>
                                 <Text style={styles.resultTotalValue}>{part2Total.toFixed(2)} Pkt. = Note {part2Grade.value} ({part2Grade.label})</Text>
                             </View>
                         </View>
@@ -546,8 +603,13 @@ export const GesamtNiederschrift: React.FC<GesamtNiederschriftProps> = ({ studen
                     </View>
 
                     <Text style={styles.bestehensgrenze}>
-                        Bestehensgrenze: 50 von 100 Punkten (50%)
+                        Bestehensgrenze: 50 von 100 Punkten (50%) — kein Prüfungsbereich mit Note 6
                     </Text>
+                    {!passed && passResult.failReasons.length > 0 && (
+                        <Text style={{ fontSize: 6, color: '#991b1b', marginTop: 2 }}>
+                            Grund: {passResult.failReasons.join('; ')}
+                        </Text>
+                    )}
                 </View>
 
                 {/* Unterschriften - 3 nebeneinander */}

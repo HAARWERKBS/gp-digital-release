@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useStore } from '../lib/store';
-import { calculateGrade, getGradeColor } from '../lib/grading';
+import { calculateGrade, calculateGradeFromPercent, getGradeColor, isPassed } from '../lib/grading';
 import { ChevronRight, Calculator, FileCheck, Users, Trash2, UserPlus, AlertCircle, BookOpen, Scissors, GraduationCap, Medal } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { ExaminerGrade, Grade, TheoryScore, GradingSheet, Pruefer } from '../lib/types';
@@ -238,6 +238,7 @@ export default function GradingPage() {
     };
 
     // Berechne Gesamtpunkte für beide Teile (für Bestanden-Anzeige)
+    // Gemäß GPO und Prüfungsrechner R.Fuhs / Mail LIV Niedersachsen 15.06.2023
     const calculateTotalPointsForStudent = (studentId: string) => {
         const gradePart1 = data.grades.find(g => g.studentId === studentId && g.sheetId === 'part1');
         const gradePart2 = data.grades.find(g => g.studentId === studentId && g.sheetId === 'part2');
@@ -246,7 +247,7 @@ export default function GradingPage() {
 
         if (!gradePart1 || !gradePart2 || !sheetPart1 || !sheetPart2) return null;
 
-        // Teil 1 Punkte berechnen
+        // Hilfsfunktionen
         const getAvgForGrade = (grade: Grade, tasks: typeof sheetPart1.tasks) => {
             return tasks.reduce((sum, task) => {
                 const avgScore = grade.examiners.reduce((acc, ex) => acc + (ex.scores[task.id] || 0), 0) / grade.examiners.length;
@@ -259,27 +260,76 @@ export default function GradingPage() {
             return grade.examPieceExaminers.reduce((acc, ex) => acc + (ex.scores[examPieceId] || 0), 0) / grade.examPieceExaminers.length;
         };
 
-        // Teil 1: Arbeitsaufgaben (70%) + Prüfungsstück (30%)
+        // === Teil 1: Arbeitsaufgaben (70%) + Prüfungsstück (30%) ===
         const part1WorkTasks = getAvgForGrade(gradePart1, sheetPart1.tasks);
         const part1ExamPiece = sheetPart1.examPiece ? getExamPieceAvg(gradePart1, sheetPart1.examPiece.id) : 0;
         const part1Total = (part1WorkTasks * sheetPart1.workTaskWeight) + (part1ExamPiece * sheetPart1.examPieceWeight);
 
-        // Teil 2: Arbeitsaufgaben (70%) + Prüfungsstück (30%)
+        // === Teil 2: Praxis (60%) + Theorie (40%) ===
+        // Praxis: Arbeitsaufgaben (70%) + Prüfungsstück (30%)
         const part2WorkTasks = getAvgForGrade(gradePart2, sheetPart2.tasks);
         const part2ExamPiece = sheetPart2.examPiece ? getExamPieceAvg(gradePart2, sheetPart2.examPiece.id) : 0;
-        const part2Total = (part2WorkTasks * sheetPart2.workTaskWeight) + (part2ExamPiece * sheetPart2.examPieceWeight);
+        const part2Praxis = (part2WorkTasks * sheetPart2.workTaskWeight) + (part2ExamPiece * sheetPart2.examPieceWeight);
 
-        // Gesamtpunkte: Teil 1 (25%) + Teil 2 (75%)
-        // Teil 1 max = 100 Punkte, Teil 2 max = 100 Punkte
-        // Gewichtet: 100 × 0.25 + 100 × 0.75 = 25 + 75 = 100 Punkte Maximum
-        // Bestehensgrenze: 50 Punkte (50%) - "Wenn jeder Prüfer 50 gibt, besteht man"
+        // Theorie: Schnitt der 3 Fächer (je: schriftl.×2 + mündl.×1, /3 bzw. /2)
+        // Excel: Z107: =(2*I107+I108)/IF(H108>0,3,2)
+        let theoryPercent = 0;
+        const theorySubjectGrades: { name: string; percent: number; grade: number }[] = [];
+
+        if (sheetPart2.theorySubjects && gradePart2.theoryScores) {
+            const subjectPercents: number[] = [];
+            sheetPart2.theorySubjects.forEach(subject => {
+                const score = gradePart2.theoryScores?.find(ts => ts.subjectId === subject.id);
+                if (score) {
+                    const written = score.writtenPoints || 0;
+                    const oral = score.oralPoints || 0;
+                    const hasOral = oral > 0;
+                    // Excel: (2*schriftlich + mündlich) / IF(mündlich>0, 3, 2)
+                    const subjectPercent = hasOral
+                        ? (written * 2 + oral * 1) / 3
+                        : written; // Nur schriftlich = schriftliche Punktzahl direkt
+                    subjectPercents.push(subjectPercent);
+                    theorySubjectGrades.push({
+                        name: subject.name,
+                        percent: subjectPercent,
+                        grade: calculateGradeFromPercent(subjectPercent).value
+                    });
+                }
+            });
+            // Theorie-Durchschnitt über alle Fächer
+            if (subjectPercents.length > 0) {
+                theoryPercent = subjectPercents.reduce((a, b) => a + b, 0) / subjectPercents.length;
+            }
+        }
+
+        // Teil 2 Gesamt: Praxis × 0.6 + Theorie × 0.4
+        const part2Total = (part2Praxis * 0.6) + (theoryPercent * 0.4);
+
+        // === Gesamtpunkte: Teil 1 (25%) + Teil 2 (75%) ===
         const totalPoints = (part1Total * 0.25) + (part2Total * 0.75);
+        const finalGrade = calculateGradeFromPercent(totalPoints);
+
+        // === Sperrfach-Prüfung gemäß GPO ===
+        // Kein Prüfungsbereich darf mit Note 6 (ungenügend) bewertet sein
+        const part1Grade = calculateGradeFromPercent(part1Total);
+        const part2PraxisGrade = calculateGradeFromPercent(part2Praxis);
+        const allPartGrades = [
+            part1Grade.value,          // Teil 1 Gesamt
+            part2PraxisGrade.value,    // Teil 2 Praxis
+            ...theorySubjectGrades.map(t => t.grade)  // Einzelne Theorie-Fächer
+        ];
+
+        const passResult = isPassed(finalGrade.value, allPartGrades);
 
         return {
             part1Points: part1Total,
             part2Points: part2Total,
-            totalPoints: totalPoints,
-            passed: totalPoints >= 50
+            part2PraxisPoints: part2Praxis,
+            theoryPercent,
+            theorySubjectGrades,
+            totalPoints,
+            passed: passResult.passed,
+            failReasons: passResult.failReasons
         };
     };
 
@@ -318,11 +368,31 @@ export default function GradingPage() {
 
             let totalPoints = part1Total * 0.25; // Teil 1 = 25%
 
-            // Teil 2 hinzufügen wenn vorhanden
+            // Teil 2 hinzufügen wenn vorhanden: Praxis × 0.6 + Theorie × 0.4
             if (gradePart2 && sheetPart2) {
                 const part2WorkTasks = getAvgForGrade(gradePart2, sheetPart2.tasks);
                 const part2ExamPiece = sheetPart2.examPiece ? getExamPieceAvg(gradePart2, sheetPart2.examPiece.id) : 0;
-                const part2Total = (part2WorkTasks * sheetPart2.workTaskWeight) + (part2ExamPiece * sheetPart2.examPieceWeight);
+                const part2Praxis = (part2WorkTasks * sheetPart2.workTaskWeight) + (part2ExamPiece * sheetPart2.examPieceWeight);
+
+                // Theorie berechnen
+                let theoryPercent = 0;
+                if (sheetPart2.theorySubjects && gradePart2.theoryScores) {
+                    const subjectPercents: number[] = [];
+                    sheetPart2.theorySubjects.forEach(subject => {
+                        const score = gradePart2.theoryScores?.find(ts => ts.subjectId === subject.id);
+                        if (score) {
+                            const written = score.writtenPoints || 0;
+                            const oral = score.oralPoints || 0;
+                            const subjectPct = oral > 0 ? (written * 2 + oral) / 3 : written;
+                            subjectPercents.push(subjectPct);
+                        }
+                    });
+                    if (subjectPercents.length > 0) {
+                        theoryPercent = subjectPercents.reduce((a, b) => a + b, 0) / subjectPercents.length;
+                    }
+                }
+
+                const part2Total = (part2Praxis * 0.6) + (theoryPercent * 0.4);
                 totalPoints += part2Total * 0.75; // Teil 2 = 75%
             }
 
@@ -413,15 +483,21 @@ export default function GradingPage() {
         const betriebsorgPoints = getTheoryPoints('betriebsorganisation');
         const wisoPoints = getTheoryPoints('wirtschafts');
 
-        // Teil 2 Gesamt (Praxis + Theorie gemittelt)
+        // Teil 2 Gesamt: Praxis × 0.6 + Theorie × 0.4 (gemäß GPO)
         const theoryAvg = (friseurtechnikenPoints + betriebsorgPoints + wisoPoints) / 3;
-        const teil2GesamtPoints = teil2PraxisPoints; // Vereinfacht: nur Praxis für Gesamtpunkte
+        const teil2GesamtPoints = (teil2PraxisPoints * 0.6) + (theoryAvg * 0.4);
         const teil2GesamtGrade = getGradeValue(teil2GesamtPoints, 100);
 
-        // Gesamtergebnis
+        // Gesamtergebnis: Teil 1 (25%) + Teil 2 (75%)
         const gesamtPoints = (teil1Points * 0.25) + (teil2GesamtPoints * 0.75);
         const gesamtGrade = getGradeValue(gesamtPoints, 100);
-        const passed = gesamtPoints >= 50;
+
+        // Sperrfach-Prüfung gemäß GPO
+        const friseurtechnikenGrade = getGradeValue(friseurtechnikenPoints, 100);
+        const betriebsorgGrade = getGradeValue(betriebsorgPoints, 100);
+        const wisoGrade = getGradeValue(wisoPoints, 100);
+        const allPartGrades = [teil1Grade, teil2PraxisGrade, friseurtechnikenGrade, betriebsorgGrade, wisoGrade];
+        const passResult = isPassed(gesamtGrade, allPartGrades);
 
         return {
             teil1Points,
@@ -431,16 +507,18 @@ export default function GradingPage() {
             wahlqualifikationPoints,
             wahlqualifikationGrade,
             friseurtechnikenPoints,
-            friseurtechnikenGrade: getGradeValue(friseurtechnikenPoints, 100),
+            friseurtechnikenGrade,
             betriebsorgPoints,
-            betriebsorgGrade: getGradeValue(betriebsorgPoints, 100),
+            betriebsorgGrade,
             wisoPoints,
-            wisoGrade: getGradeValue(wisoPoints, 100),
+            wisoGrade,
+            theoryAvg,
             teil2GesamtPoints,
             teil2GesamtGrade,
             gesamtPoints,
             gesamtGrade,
-            passed
+            passed: passResult.passed,
+            failReasons: passResult.failReasons
         };
     };
 
