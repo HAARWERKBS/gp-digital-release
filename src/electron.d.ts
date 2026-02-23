@@ -7,6 +7,7 @@ interface UpdateInfo {
     releaseNotes?: string;
     updateUrl?: string;
     hasUpdate: boolean;
+    error?: string;
 }
 
 interface ElectronAPI {

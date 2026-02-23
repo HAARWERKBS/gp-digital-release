@@ -7,6 +7,7 @@ interface UpdateInfo {
     downloadUrl?: string;
     releaseNotes?: string;
     hasUpdate: boolean;
+    error?: string;
 }
 
 export const UpdateNotification: React.FC = () => {
@@ -117,8 +118,10 @@ export const VersionInfo: React.FC = () => {
             try {
                 const info = await window.electronAPI.checkForUpdates();
                 setUpdateInfo(info);
-                if (!info.hasUpdate) {
-                    alert('Sie verwenden bereits die neueste Version.');
+                if (info.error) {
+                    alert('Update-Prüfung fehlgeschlagen:\n' + info.error + '\n\nBitte prüfen Sie Ihre Internetverbindung.');
+                } else if (!info.hasUpdate) {
+                    alert('Sie verwenden bereits die neueste Version (' + info.currentVersion + ').');
                 }
             } catch (error) {
                 alert('Update-Prüfung fehlgeschlagen. Bitte prüfen Sie Ihre Internetverbindung.');

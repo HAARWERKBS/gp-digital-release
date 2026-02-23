@@ -122,16 +122,25 @@ function getPlatformDownloadUrl(data) {
 // IPC Handler für Update-Check
 ipcMain.handle('check-for-updates', async () => {
     const versionUrl = getVersionUrl();
+    // Cache-Busting: Zeitstempel anhängen um CDN-Cache zu umgehen
+    const cacheBuster = '?t=' + Date.now();
+
+    console.log('[Update-Check] APP_VERSION:', APP_VERSION);
+    console.log('[Update-Check] URL:', versionUrl + cacheBuster);
 
     try {
         // Prüfe Version vom Produktions-Repo
-        const response = await fetch(versionUrl);
+        const response = await fetch(versionUrl + cacheBuster);
+        console.log('[Update-Check] Response Status:', response.status);
+
         if (response.ok) {
             const data = await response.json();
+            console.log('[Update-Check] Remote Version:', data.version);
+            console.log('[Update-Check] hasUpdate:', data.version !== APP_VERSION);
 
             // Wenn updateUrl gesetzt → für zukünftige Checks merken
             if (data.updateUrl && data.updateUrl !== '' && data.updateUrl !== versionUrl) {
-                console.log('Update-URL umgeleitet:', data.updateUrl);
+                console.log('[Update-Check] URL umgeleitet:', data.updateUrl);
                 saveUpdateUrl(data.updateUrl);
             }
 
@@ -142,17 +151,26 @@ ipcMain.handle('check-for-updates', async () => {
                 releaseNotes: data.releaseNotes,
                 hasUpdate: data.version !== APP_VERSION
             };
+        } else {
+            console.error('[Update-Check] HTTP-Fehler:', response.status, response.statusText);
+            return {
+                currentVersion: APP_VERSION,
+                latestVersion: APP_VERSION,
+                hasUpdate: false,
+                error: 'Server antwortete mit Status ' + response.status
+            };
         }
     } catch (error) {
-        console.error('Update-Check fehlgeschlagen (URL: ' + versionUrl + '):', error.message);
+        console.error('[Update-Check] Fehlgeschlagen (URL: ' + versionUrl + '):', error.message);
 
         // Fallback: Wenn gespeicherte URL fehlschlägt, Original-URL versuchen
         if (versionUrl !== DEFAULT_VERSION_URL) {
             try {
-                console.log('Fallback auf Standard-URL...');
-                const fallbackResponse = await fetch(DEFAULT_VERSION_URL);
+                console.log('[Update-Check] Fallback auf Standard-URL...');
+                const fallbackResponse = await fetch(DEFAULT_VERSION_URL + cacheBuster);
                 if (fallbackResponse.ok) {
                     const data = await fallbackResponse.json();
+                    console.log('[Update-Check] Fallback erfolgreich, Remote Version:', data.version);
                     return {
                         currentVersion: APP_VERSION,
                         latestVersion: data.version,
@@ -162,16 +180,17 @@ ipcMain.handle('check-for-updates', async () => {
                     };
                 }
             } catch (fallbackError) {
-                console.error('Auch Fallback fehlgeschlagen:', fallbackError.message);
+                console.error('[Update-Check] Auch Fallback fehlgeschlagen:', fallbackError.message);
             }
         }
-    }
 
-    return {
-        currentVersion: APP_VERSION,
-        latestVersion: APP_VERSION,
-        hasUpdate: false
-    };
+        return {
+            currentVersion: APP_VERSION,
+            latestVersion: APP_VERSION,
+            hasUpdate: false,
+            error: 'Verbindung fehlgeschlagen: ' + error.message
+        };
+    }
 });
 
 // IPC Handler für externe URL öffnen
