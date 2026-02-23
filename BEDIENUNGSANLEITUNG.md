@@ -8,21 +8,55 @@
 
 ## Inhaltsverzeichnis
 
-1. [Produktaktivierung (Lizenz)](#1-produktaktivierung-lizenz)
-2. [Ersteinrichtung](#2-ersteinrichtung)
-3. [Anmeldung](#3-anmeldung)
-4. [Jahrgänge verwalten](#4-jahrgänge-verwalten)
-5. [Prüflinge verwalten](#5-prüflinge-verwalten)
-6. [Benotung durchführen](#6-benotung-durchführen)
-7. [PDF-Dokumente erstellen](#7-pdf-dokumente-erstellen)
-8. [Gesellenbriefe erstellen](#8-gesellenbriefe-erstellen)
-9. [Einstellungen (nur Administratoren)](#9-einstellungen-nur-administratoren)
-10. [Passwortschutz verstehen](#10-passwortschutz-verstehen)
-11. [Häufige Fragen](#11-häufige-fragen)
+1. [Installation & Erster Start](#1-installation--erster-start)
+2. [Produktaktivierung (Lizenz)](#2-produktaktivierung-lizenz)
+3. [Ersteinrichtung](#3-ersteinrichtung)
+4. [Anmeldung](#4-anmeldung)
+5. [Jahrgänge verwalten](#5-jahrgänge-verwalten)
+6. [Prüflinge verwalten](#6-prüflinge-verwalten)
+7. [Benotung durchführen](#7-benotung-durchführen)
+8. [PDF-Dokumente erstellen](#8-pdf-dokumente-erstellen)
+9. [Gesellenbriefe erstellen](#9-gesellenbriefe-erstellen)
+10. [Einstellungen (nur Administratoren)](#10-einstellungen-nur-administratoren)
+11. [Passwortschutz verstehen](#11-passwortschutz-verstehen)
+12. [Häufige Fragen](#12-häufige-fragen)
 
 ---
 
-## 1. Produktaktivierung (Lizenz)
+## 1. Installation & Erster Start
+
+### macOS (Apple)
+
+1. Öffnen Sie die heruntergeladene **DMG-Datei** per Doppelklick
+2. Ziehen Sie **GP Digital** in den **Programme**-Ordner
+3. Beim **ersten Öffnen** erscheint eine Sicherheitswarnung:
+
+> *„GP Digital" kann nicht geöffnet werden, da es von einem nicht verifizierten Entwickler stammt.*
+
+**So lösen Sie das Problem:**
+
+- **Variante 1 (empfohlen):** Klicken Sie mit der **rechten Maustaste** (oder Ctrl + Klick) auf die App → wählen Sie **„Öffnen"** → klicken Sie im Dialog auf **„Öffnen"**
+- **Variante 2:** Gehen Sie zu **Systemeinstellungen → Datenschutz & Sicherheit** → scrollen Sie nach unten → klicken Sie bei der Meldung zu GP Digital auf **„Trotzdem öffnen"**
+
+**Hinweis:** Diese Warnung erscheint nur beim allerersten Start. Danach öffnet sich die App ganz normal.
+
+### Windows
+
+1. Führen Sie die heruntergeladene **Setup-Datei** (`.exe`) per Doppelklick aus
+2. Beim ersten Start erscheint möglicherweise eine **SmartScreen-Warnung**:
+
+> *„Der Computer wurde durch Windows geschützt"*
+
+**So lösen Sie das Problem:**
+
+1. Klicken Sie auf **„Weitere Informationen"**
+2. Klicken Sie auf **„Trotzdem ausführen"**
+
+**Hinweis:** Diese Warnung erscheint, weil die Software neu ist und noch nicht von vielen Nutzern installiert wurde. Die App ist sicher – die Warnung verschwindet nach dem ersten Start.
+
+---
+
+## 2. Produktaktivierung (Lizenz)
 
 Beim ersten Start der Software müssen Sie einen gültigen Lizenzschlüssel eingeben.
 
@@ -76,7 +110,7 @@ Wenn Ihre Lizenz abgelaufen ist:
 
 ---
 
-## 2. Ersteinrichtung
+## 3. Ersteinrichtung
 
 Wenn Sie die Software zum ersten Mal starten (nach der Lizenzaktivierung), müssen Sie ein Administrator-Passwort festlegen.
 
@@ -92,7 +126,7 @@ Wenn Sie die Software zum ersten Mal starten (nach der Lizenzaktivierung), müss
 
 ---
 
-## 3. Anmeldung
+## 4. Anmeldung
 
 Nach der Ersteinrichtung sehen Sie bei jedem Start die Anmeldeseite.
 
@@ -115,7 +149,7 @@ Aus Sicherheitsgründen werden Sie nach **30 Minuten ohne Aktivität** automatis
 
 ---
 
-## 4. Jahrgänge verwalten
+## 5. Jahrgänge verwalten
 
 ![Jahrgang Dropdown](Anleitung-Bilder/04-jahrgang-dropdown.png)
 
@@ -129,7 +163,7 @@ Oben links unter dem Logo sehen Sie den aktuellen Jahrgang. Klicken Sie darauf, 
 
 ---
 
-## 5. Prüflinge verwalten
+## 6. Prüflinge verwalten
 
 Nach der Anmeldung sehen Sie die **Prüflinge-Seite** mit allen Prüflingen des aktuellen Jahrgangs.
 
@@ -201,7 +235,7 @@ Wenn ein Prüfling die Prüfung nicht bestanden hat und eine Nachprüfung absolv
 
 ---
 
-## 6. Benotung durchführen
+## 7. Benotung durchführen
 
 Klicken Sie in der Seitenleiste auf **"Benotung"**.
 
@@ -236,7 +270,7 @@ Am Ende jedes Teils sehen Sie die Zusammenfassung mit:
 
 ---
 
-## 7. PDF-Dokumente erstellen
+## 8. PDF-Dokumente erstellen
 
 ### Niederschrift (pro Teil)
 
@@ -260,7 +294,7 @@ Die Gesamtniederschrift zeigt:
 
 ---
 
-## 8. Gesellenbriefe erstellen
+## 9. Gesellenbriefe erstellen
 
 Klicken Sie in der Seitenleiste auf **"Gesellenbriefe"**.
 
@@ -317,7 +351,7 @@ Sie können bis zu **7 individuelle Textfelder** auf dem Gesellenbrief platziere
 
 ---
 
-## 9. Einstellungen (nur Administratoren)
+## 10. Einstellungen (nur Administratoren)
 
 Klicken Sie in der Seitenleiste auf **"Einstellungen"**.
 
@@ -397,7 +431,7 @@ Hier können Sie anpassen:
 
 ---
 
-## 10. Passwortschutz verstehen
+## 11. Passwortschutz verstehen
 
 ### Was ist geschützt?
 
@@ -425,7 +459,7 @@ Das Mitarbeiter-Passwort gewährt nur eingeschränkten Zugriff:
 
 ---
 
-## 11. Häufige Fragen
+## 12. Häufige Fragen
 
 ### "Ich habe mein Passwort vergessen"
 
