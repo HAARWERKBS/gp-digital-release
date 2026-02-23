@@ -110,3 +110,44 @@ ipcMain.handle('check-for-updates', async () => {
 ipcMain.handle('open-external', (event, url) => {
     shell.openExternal(url);
 });
+
+// ============================================
+// MASTER-PASSWORT: Verwendete Passwörter persistent speichern
+// Datei liegt im App-Datenverzeichnis (überlebt localStorage-Reset)
+// ============================================
+
+const usedMasterPasswordsPath = path.join(app.getPath('userData'), 'used-master-passwords.json');
+
+function getUsedMasterPasswords() {
+    try {
+        if (fs.existsSync(usedMasterPasswordsPath)) {
+            const data = fs.readFileSync(usedMasterPasswordsPath, 'utf-8');
+            return JSON.parse(data);
+        }
+    } catch (error) {
+        console.error('Fehler beim Lesen der verwendeten Master-Passwörter:', error);
+    }
+    return [];
+}
+
+function saveUsedMasterPassword(passwordHash) {
+    try {
+        const used = getUsedMasterPasswords();
+        if (!used.includes(passwordHash)) {
+            used.push(passwordHash);
+            fs.writeFileSync(usedMasterPasswordsPath, JSON.stringify(used, null, 2), 'utf-8');
+        }
+    } catch (error) {
+        console.error('Fehler beim Speichern des verwendeten Master-Passworts:', error);
+    }
+}
+
+// IPC Handler: Verwendete Master-Passwörter abrufen
+ipcMain.handle('get-used-master-passwords', () => {
+    return getUsedMasterPasswords();
+});
+
+// IPC Handler: Master-Passwort als verwendet markieren
+ipcMain.handle('save-used-master-password', (event, passwordHash) => {
+    saveUsedMasterPassword(passwordHash);
+});

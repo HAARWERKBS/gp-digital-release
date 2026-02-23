@@ -229,8 +229,69 @@ export type GlobalSettings = {
     _globalVersion?: number;
 };
 
-// Master-Admin-Passwort (nur für Entwickler/Support)
-export const MASTER_ADMIN_PASSWORD = 'FriseurInnung2024!';
+// ============================================
+// MASTER-ADMIN-PASSWORT SYSTEM
+// Generierbare Einmal-Passwörter für Entwickler/Support
+// Format: GPDM-XXXXX-XXXXX
+// ============================================
+
+// Altes Master-Passwort (Abwärtskompatibilität für bestehende Installationen)
+export const LEGACY_MASTER_PASSWORD = 'FriseurInnung2024!';
+
+// Prüft ob ein Passwort ein gültiges Master-Admin-Passwort ist
+// (Format-Check + Prüfsummen-Validierung, NICHT Einmal-Check – der passiert in store/PasswordDialog)
+export function validateMasterPassword(password: string): boolean {
+    // Legacy-Passwort akzeptieren (Übergangsphase)
+    if (password === LEGACY_MASTER_PASSWORD) return true;
+
+    // Neues Format prüfen: GPDM-XXXXX-XXXXX
+    const pattern = /^GPDM-[A-Z2-9]{5}-[A-Z2-9]{5}$/;
+    if (!pattern.test(password.toUpperCase())) return false;
+
+    const upper = password.toUpperCase();
+    const randomPart = upper.split('-')[1];
+    const checksum = upper.split('-')[2];
+
+    const expectedChecksum = calculateMasterChecksum(randomPart);
+    return checksum === expectedChecksum;
+}
+
+// Prüfsumme für Master-Passwörter (eigener Seed, unabhängig von Lizenzschlüsseln)
+function calculateMasterChecksum(randomPart: string): string {
+    // Geheimer Seed – unterscheidet Master-PW-Validierung von Lizenz-Validierung
+    const seed = 'GpD!g1t4l_M4st3r';
+    const combined = seed + randomPart;
+    let sum = 0;
+
+    for (let i = 0; i < combined.length; i++) {
+        const charCode = combined.charCodeAt(i);
+        sum += charCode * (i + 3); // Offset 3 statt 1 (anders als Lizenz)
+    }
+
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    let result = '';
+
+    for (let i = 0; i < 5; i++) {
+        const index = (sum + i * 11) % chars.length; // Faktor 11 statt 7 (anders als Lizenz)
+        result += chars[index];
+        sum = Math.floor(sum / chars.length) + sum;
+    }
+
+    return result;
+}
+
+// Master-Passwort generieren (für generate-master-password.js)
+export function generateMasterPassword(): string {
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+
+    let randomPart = '';
+    for (let i = 0; i < 5; i++) {
+        randomPart += chars[Math.floor(Math.random() * chars.length)];
+    }
+
+    const checksum = calculateMasterChecksum(randomPart);
+    return `GPDM-${randomPart}-${checksum}`;
+}
 
 // ============================================
 // AUTHENTICATION & AUTHORIZATION SYSTEM

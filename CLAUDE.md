@@ -111,7 +111,13 @@ PDF generation uses `@react-pdf/renderer` with `StyleSheet.create()` for styling
 - `ProtectedRoute.tsx` - Route guard checking authentication and role permissions
 - `PasswordDialog.tsx` - Re-authentication for destructive actions
 
-**Master Password**: `FriseurInnung2024!` (defined in `types.ts:MASTER_ADMIN_PASSWORD`) - always works for admin access.
+**Master Password System** (for developer/support emergency access):
+- **Format**: `GPDM-XXXXX-XXXXX` – algorithmically validated (like license keys), one-time use
+- **Validation**: `validateMasterPassword()` in `types.ts` – checks format + checksum using secret seed
+- **One-time enforcement**: Used passwords stored in `~/Library/Application Support/GP Digital/used-master-passwords.json` via Electron IPC (survives localStorage reset). Browser fallback: localStorage key `gp_used_master_passwords`.
+- **Legacy**: `FriseurInnung2024!` (`LEGACY_MASTER_PASSWORD` in `types.ts`) still accepted for backwards compatibility
+- **Generator tools**: `node generate-master-password.js` (CLI) or `master-passwort-generator.html` (browser)
+- **Login flow**: `login()` in `store.tsx` is `async` (returns `Promise`) due to Electron IPC for one-time check
 
 ## Domain-Specific Logic
 
@@ -154,7 +160,7 @@ Central management of examiners with roles (Vorsitzender, Prüfer, Beisitzer). E
 ## Electron Desktop App
 
 ### Structure
-- **`electron/main.cjs`** - Main process: window management, IPC handlers for version check and external URLs
+- **`electron/main.cjs`** - Main process: window management, IPC handlers for version check, external URLs, and used master password persistence
 - **`electron/preload.cjs`** - Context bridge exposing `window.electronAPI` to React app
 - **`src/electron.d.ts`** - TypeScript definitions for Electron API
 

@@ -12,6 +12,8 @@ interface ElectronAPI {
     getAppVersion: () => Promise<string>;
     checkForUpdates: () => Promise<UpdateInfo>;
     openExternal: (url: string) => Promise<void>;
+    getUsedMasterPasswords: () => Promise<string[]>;
+    saveUsedMasterPassword: (hash: string) => Promise<void>;
     isElectron: boolean;
 }
 

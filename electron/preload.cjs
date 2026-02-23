@@ -11,6 +11,10 @@ contextBridge.exposeInMainWorld('electronAPI', {
     // Externe URL öffnen
     openExternal: (url) => ipcRenderer.invoke('open-external', url),
 
+    // Master-Passwort: Verwendete Passwörter persistent verwalten
+    getUsedMasterPasswords: () => ipcRenderer.invoke('get-used-master-passwords'),
+    saveUsedMasterPassword: (hash) => ipcRenderer.invoke('save-used-master-password', hash),
+
     // Prüfen ob wir in Electron laufen
     isElectron: true
 });

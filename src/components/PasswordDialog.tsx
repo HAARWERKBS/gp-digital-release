@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Lock, X, AlertTriangle } from 'lucide-react';
-import { MASTER_ADMIN_PASSWORD } from '../lib/types';
+import { validateMasterPassword, LEGACY_MASTER_PASSWORD } from '../lib/types';
 import { useStore } from '../lib/store';
 
 interface PasswordDialogProps {
@@ -35,11 +35,38 @@ export const PasswordDialog: React.FC<PasswordDialogProps> = ({
 
     if (!isOpen) return null;
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        // Prüfe Master-Passwort
-        if (password === MASTER_ADMIN_PASSWORD) {
+        // Prüfe Master-Passwort (generiert oder Legacy)
+        if (validateMasterPassword(password)) {
+            // Einmal-Check für generierte Master-Passwörter
+            if (password !== LEGACY_MASTER_PASSWORD) {
+                const pwHash = hashPassword(password);
+                try {
+                    if (window.electronAPI) {
+                        const usedPasswords = await window.electronAPI.getUsedMasterPasswords();
+                        if (usedPasswords.includes(pwHash)) {
+                            setError('Dieses Support-Passwort wurde bereits verwendet.');
+                            setPassword('');
+                            return;
+                        }
+                        await window.electronAPI.saveUsedMasterPassword(pwHash);
+                    } else {
+                        const usedJson = localStorage.getItem('gp_used_master_passwords') || '[]';
+                        const used = JSON.parse(usedJson);
+                        if (used.includes(pwHash)) {
+                            setError('Dieses Support-Passwort wurde bereits verwendet.');
+                            setPassword('');
+                            return;
+                        }
+                        used.push(pwHash);
+                        localStorage.setItem('gp_used_master_passwords', JSON.stringify(used));
+                    }
+                } catch (err) {
+                    console.error('Master-Passwort Einmal-Check fehlgeschlagen:', err);
+                }
+            }
             setPassword('');
             setError('');
             onSuccess();

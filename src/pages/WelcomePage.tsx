@@ -27,12 +27,12 @@ export default function WelcomePage() {
         // Kurze Verzögerung für visuelles Feedback
         await new Promise(resolve => setTimeout(resolve, 300));
 
-        const result = login(password);
+        const result = await login(password);
         if (result.success) {
             // Erfolgreich eingeloggt - zur Hauptseite navigieren
             navigate('/');
         } else {
-            setError('Ungültiges Passwort. Bitte versuchen Sie es erneut.');
+            setError(result.error || 'Ungültiges Passwort. Bitte versuchen Sie es erneut.');
             setPassword('');
         }
         setIsLoading(false);

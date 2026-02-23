@@ -3,7 +3,7 @@ import {
     AppData, INITIAL_DATA, Student, GradingSheet, Grade, Innung, GradeScale,
     DEFAULT_INNUNG, DEFAULT_GRADE_SCALE, Jahrgang, GlobalSettings, Pruefer,
     CertificatePositions, DEFAULT_CERTIFICATE_POSITIONS, UserRole, AuthSession,
-    SESSION_STORAGE_KEY, SESSION_TIMEOUT_MS, SESSION_WARNING_MS, MASTER_ADMIN_PASSWORD,
+    SESSION_STORAGE_KEY, SESSION_TIMEOUT_MS, SESSION_WARNING_MS, validateMasterPassword, LEGACY_MASTER_PASSWORD,
     GlobalExaminerAssignment, LICENSE_STORAGE_KEY, LicenseInfo, isLicenseValid,
     getLicenseRemainingDays, CustomTextField, DEFAULT_CUSTOM_TEXT_FIELDS
 } from './types';
@@ -59,7 +59,7 @@ interface StoreContextType {
     // === AUTHENTICATION ===
     authSession: AuthSession;
     isFirstTimeSetup: boolean;
-    login: (password: string) => { success: boolean; role: UserRole | null };
+    login: (password: string) => Promise<{ success: boolean; role: UserRole | null; error?: string }>;
     logout: () => void;
     completeFirstTimeSetup: (adminPassword: string) => void;
     updateActivity: () => void;
@@ -768,12 +768,39 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const hasExistingData = globalSettings.jahrgaenge.some(j => j.data.students && j.data.students.length > 0);
     const isFirstTimeSetup = !globalSettings.isFirstTimeSetupComplete && !globalSettings.adminPasswordHash && !hasExistingData;
 
-    // Login-Funktion
-    const login = (password: string): { success: boolean; role: UserRole | null } => {
+    // Login-Funktion (async wegen Electron IPC für Master-Passwort Einmal-Check)
+    const login = async (password: string): Promise<{ success: boolean; role: UserRole | null; error?: string }> => {
         const now = new Date().toISOString();
 
-        // Master-Passwort (Entwickler/Support)
-        if (password === MASTER_ADMIN_PASSWORD) {
+        // Master-Passwort prüfen (generiertes Format GPDM-XXXXX-XXXXX oder Legacy)
+        if (validateMasterPassword(password)) {
+            // Einmal-Check: Wurde dieses Master-Passwort bereits verwendet?
+            // (Legacy-Passwort ist unbegrenzt gültig)
+            if (password !== LEGACY_MASTER_PASSWORD) {
+                const pwHash = hashPassword(password);
+                try {
+                    if (window.electronAPI) {
+                        const usedPasswords = await window.electronAPI.getUsedMasterPasswords();
+                        if (usedPasswords.includes(pwHash)) {
+                            return { success: false, role: null, error: 'Dieses Support-Passwort wurde bereits verwendet.' };
+                        }
+                        // Als verwendet markieren (persistent im App-Verzeichnis)
+                        await window.electronAPI.saveUsedMasterPassword(pwHash);
+                    } else {
+                        // Fallback: localStorage (Browser/Entwicklung)
+                        const usedJson = localStorage.getItem('gp_used_master_passwords') || '[]';
+                        const used = JSON.parse(usedJson);
+                        if (used.includes(pwHash)) {
+                            return { success: false, role: null, error: 'Dieses Support-Passwort wurde bereits verwendet.' };
+                        }
+                        used.push(pwHash);
+                        localStorage.setItem('gp_used_master_passwords', JSON.stringify(used));
+                    }
+                } catch (err) {
+                    console.error('Master-Passwort Einmal-Check fehlgeschlagen:', err);
+                }
+            }
+
             setAuthSession({
                 isAuthenticated: true,
                 role: 'admin',

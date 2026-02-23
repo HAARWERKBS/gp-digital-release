@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useStore } from '../lib/store';
 import { Plus, Trash2, Save, RotateCcw, Download, Upload, Cloud, HardDrive, FileText, Settings2, GraduationCap, BookOpen, Building2, Scale, AlertTriangle, Lock, Eye, EyeOff, Users, UserPlus, Edit2, Check, X, ChevronDown, ChevronRight } from 'lucide-react';
-import { GradingTask, AppData, GradingSheet, TheorySubject, Innung, GradeScale, DEFAULT_INNUNG, DEFAULT_GRADE_SCALE, MASTER_ADMIN_PASSWORD, Pruefer } from '../lib/types';
+import { GradingTask, AppData, GradingSheet, TheorySubject, Innung, GradeScale, DEFAULT_INNUNG, DEFAULT_GRADE_SCALE, validateMasterPassword, Pruefer } from '../lib/types';
 import { usePasswordProtection, hashPassword } from '../components/PasswordDialog';
 import { VersionInfo } from '../components/UpdateNotification';
 
@@ -42,7 +42,7 @@ export default function SettingsPage() {
             setPasswordError('Passwörter stimmen nicht überein.');
             return;
         }
-        if (newPassword === MASTER_ADMIN_PASSWORD) {
+        if (validateMasterPassword(newPassword)) {
             setPasswordError('Dieses Passwort ist nicht erlaubt.');
             return;
         }
@@ -78,7 +78,7 @@ export default function SettingsPage() {
             setMitarbeiterPasswordError('Passwörter stimmen nicht überein.');
             return;
         }
-        if (newMitarbeiterPassword === MASTER_ADMIN_PASSWORD) {
+        if (validateMasterPassword(newMitarbeiterPassword)) {
             setMitarbeiterPasswordError('Dieses Passwort ist nicht erlaubt.');
             return;
         }
