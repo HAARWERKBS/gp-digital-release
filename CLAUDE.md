@@ -165,10 +165,27 @@ Central management of examiners with roles (Vorsitzender, Prüfer, Beisitzer). E
 - **`src/electron.d.ts`** - TypeScript definitions for Electron API
 
 ### Update System
-The app checks `version.json` from GitHub to notify users of available updates. The URL is configured in `electron/main.cjs`:
+The app checks `public/version.json` from the **production repo** to notify users of available updates:
 ```
-https://raw.githubusercontent.com/Hairschneider/gp-digital/main/version.json
+https://raw.githubusercontent.com/HAARWERKBS/gp-digital-release/main/public/version.json
 ```
+
+**URL Fallback Mechanism** (future-proof for repo/account changes):
+1. App first checks for a saved redirect URL in `app.getPath('userData')/update-url.json`
+2. If `version.json` contains a non-empty `updateUrl` field → saves it for future checks
+3. If saved URL fails → falls back to the hardcoded default URL above
+4. This allows seamless migration to a new GitHub account/domain without breaking existing installs
+
+### Two-Repo Workflow
+```bash
+git remote -v
+# origin      → HAARWERKBS/GP-Digital (development + testing)
+# production  → HAARWERKBS/gp-digital-release (public releases)
+
+git push              # Push to dev repo (normal development)
+git push production main  # Push stable release to production repo
+```
+The production repo serves `version.json` and GitHub Releases for end-user downloads.
 
 ### Building & Releases
 GitHub Actions workflow (`.github/workflows/build.yml`) builds for macOS and Windows on tag push (`v*`). Artifacts go to `release/` folder.
@@ -191,9 +208,9 @@ Required icons in `public/`: `icon.png` (512x512), `icon.icns` (macOS), `icon.ic
 
 ## Help System
 
-- `HelpDialog.tsx` - In-app accordion-style help with 8 sections
+- `HelpDialog.tsx` - In-app accordion-style help with 8 sections (default: Lizenz expanded)
 - Accessible via "Hilfe" button in sidebar (below Feedback)
-- Content mirrors `BEDIENUNGSANLEITUNG.md`
+- Content mirrors `BEDIENUNGSANLEITUNG.md` (Installation section only in .md/.html, not in-app – user already installed)
 
 ## Data Versioning
 

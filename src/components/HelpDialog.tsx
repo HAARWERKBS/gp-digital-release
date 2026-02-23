@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, ChevronRight, ChevronDown, Key, Users, ClipboardList, FileText, Award, Settings, Lock, HelpCircle, BookOpen, Download } from 'lucide-react';
+import { X, ChevronRight, ChevronDown, Key, Users, ClipboardList, FileText, Award, Settings, Lock, HelpCircle, BookOpen } from 'lucide-react';
 
 interface HelpDialogProps {
     isOpen: boolean;
@@ -14,51 +14,14 @@ type Section = {
 };
 
 export function HelpDialog({ isOpen, onClose }: HelpDialogProps) {
-    const [expandedSection, setExpandedSection] = useState<string | null>('installation');
+    const [expandedSection, setExpandedSection] = useState<string | null>('lizenz');
 
     if (!isOpen) return null;
 
     const sections: Section[] = [
         {
-            id: 'installation',
-            title: '1. Installation & Erster Start',
-            icon: <Download size={18} />,
-            content: (
-                <div className="space-y-4">
-                    <h4 className="font-semibold text-white">macOS (Apple)</h4>
-                    <ol className="list-decimal list-inside space-y-2 text-slate-300">
-                        <li>Öffnen Sie die heruntergeladene <strong>DMG-Datei</strong> per Doppelklick</li>
-                        <li>Ziehen Sie <strong>GP Digital</strong> in den <strong>Programme</strong>-Ordner</li>
-                        <li>Beim ersten Öffnen erscheint eine Sicherheitswarnung</li>
-                    </ol>
-                    <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-3 text-amber-300 text-sm">
-                        <strong>Warnung:</strong> „GP Digital kann nicht geöffnet werden, da es von einem nicht verifizierten Entwickler stammt."
-                    </div>
-                    <p className="text-slate-300 text-sm"><strong>Lösung:</strong></p>
-                    <ul className="list-disc list-inside space-y-1 text-slate-300 text-sm">
-                        <li><strong>Variante 1:</strong> Rechtsklick auf die App → <span className="text-cyan-400">„Öffnen"</span> → im Dialog auf <span className="text-cyan-400">„Öffnen"</span> klicken</li>
-                        <li><strong>Variante 2:</strong> Systemeinstellungen → Datenschutz & Sicherheit → <span className="text-cyan-400">„Trotzdem öffnen"</span></li>
-                    </ul>
-
-                    <h4 className="font-semibold text-white mt-4">Windows</h4>
-                    <ol className="list-decimal list-inside space-y-2 text-slate-300">
-                        <li>Führen Sie die heruntergeladene <strong>Setup-Datei</strong> (.exe) per Doppelklick aus</li>
-                        <li>Beim ersten Start erscheint evtl. eine SmartScreen-Warnung</li>
-                    </ol>
-                    <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-3 text-amber-300 text-sm">
-                        <strong>Warnung:</strong> „Der Computer wurde durch Windows geschützt"
-                    </div>
-                    <p className="text-slate-300 text-sm"><strong>Lösung:</strong> Auf <span className="text-cyan-400">„Weitere Informationen"</span> klicken → dann <span className="text-cyan-400">„Trotzdem ausführen"</span></p>
-
-                    <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-3 text-blue-300 text-sm">
-                        <strong>Hinweis:</strong> Diese Warnungen erscheinen nur beim allerersten Start. Danach öffnet sich die App ganz normal.
-                    </div>
-                </div>
-            )
-        },
-        {
             id: 'lizenz',
-            title: '2. Produktaktivierung (Lizenz)',
+            title: '1. Produktaktivierung (Lizenz)',
             icon: <Key size={18} />,
             content: (
                 <div className="space-y-4">
@@ -82,7 +45,7 @@ export function HelpDialog({ isOpen, onClose }: HelpDialogProps) {
         },
         {
             id: 'anmeldung',
-            title: '3. Anmeldung & Benutzerrollen',
+            title: '2. Anmeldung & Benutzerrollen',
             icon: <Users size={18} />,
             content: (
                 <div className="space-y-4">
@@ -111,7 +74,7 @@ export function HelpDialog({ isOpen, onClose }: HelpDialogProps) {
         },
         {
             id: 'prueflinge',
-            title: '4. Prüflinge verwalten',
+            title: '3. Prüflinge verwalten',
             icon: <Users size={18} />,
             content: (
                 <div className="space-y-4">
@@ -138,7 +101,7 @@ export function HelpDialog({ isOpen, onClose }: HelpDialogProps) {
         },
         {
             id: 'benotung',
-            title: '5. Benotung durchführen',
+            title: '4. Benotung durchführen',
             icon: <ClipboardList size={18} />,
             content: (
                 <div className="space-y-4">
@@ -170,7 +133,7 @@ export function HelpDialog({ isOpen, onClose }: HelpDialogProps) {
         },
         {
             id: 'gesellenbriefe',
-            title: '6. Gesellenbriefe erstellen',
+            title: '5. Gesellenbriefe erstellen',
             icon: <Award size={18} />,
             content: (
                 <div className="space-y-4">
@@ -223,7 +186,7 @@ export function HelpDialog({ isOpen, onClose }: HelpDialogProps) {
         },
         {
             id: 'einstellungen',
-            title: '7. Einstellungen (nur Admin)',
+            title: '6. Einstellungen (nur Admin)',
             icon: <Settings size={18} />,
             content: (
                 <div className="space-y-4">
@@ -245,7 +208,7 @@ export function HelpDialog({ isOpen, onClose }: HelpDialogProps) {
         },
         {
             id: 'passwortschutz',
-            title: '8. Passwortschutz verstehen',
+            title: '7. Passwortschutz verstehen',
             icon: <Lock size={18} />,
             content: (
                 <div className="space-y-4">
@@ -277,7 +240,7 @@ export function HelpDialog({ isOpen, onClose }: HelpDialogProps) {
         },
         {
             id: 'faq',
-            title: '9. Häufige Fragen',
+            title: '8. Häufige Fragen',
             icon: <HelpCircle size={18} />,
             content: (
                 <div className="space-y-4">
@@ -363,7 +326,7 @@ export function HelpDialog({ isOpen, onClose }: HelpDialogProps) {
                         <div>
                             <strong className="text-slate-300">Kontakt:</strong> info@liv-friseure-nds.de • Tel: 0511 / 42 72 31
                         </div>
-                        <div>GP Digital v1.0</div>
+                        <div>GP Digital v1.0 🧪 Test</div>
                     </div>
                 </div>
             </div>
