@@ -326,7 +326,7 @@ export function HelpDialog({ isOpen, onClose }: HelpDialogProps) {
                         <div>
                             <strong className="text-slate-300">Kontakt:</strong> info@liv-friseure-nds.de • Tel: 0511 / 42 72 31
                         </div>
-                        <div>GP Digital v1.0 🧪 Test</div>
+                        <div>GP Digital v1.0</div>
                     </div>
                 </div>
             </div>
