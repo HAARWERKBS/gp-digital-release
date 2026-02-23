@@ -108,6 +108,17 @@ function saveUpdateUrl(newUrl) {
     }
 }
 
+// Plattformspezifische Download-URL ermitteln
+function getPlatformDownloadUrl(data) {
+    // 1. Bevorzugt: Explizite URLs aus downloads-Objekt in version.json
+    if (data.downloads) {
+        if (process.platform === 'darwin' && data.downloads.mac) return data.downloads.mac;
+        if (process.platform === 'win32' && data.downloads.win) return data.downloads.win;
+    }
+    // 2. Fallback: Allgemeine Releases-Seite
+    return data.downloadUrl || 'https://github.com/HAARWERKBS/gp-digital-release/releases/latest';
+}
+
 // IPC Handler für Update-Check
 ipcMain.handle('check-for-updates', async () => {
     const versionUrl = getVersionUrl();
@@ -127,7 +138,7 @@ ipcMain.handle('check-for-updates', async () => {
             return {
                 currentVersion: APP_VERSION,
                 latestVersion: data.version,
-                downloadUrl: data.downloadUrl,
+                downloadUrl: getPlatformDownloadUrl(data),
                 releaseNotes: data.releaseNotes,
                 hasUpdate: data.version !== APP_VERSION
             };
@@ -145,7 +156,7 @@ ipcMain.handle('check-for-updates', async () => {
                     return {
                         currentVersion: APP_VERSION,
                         latestVersion: data.version,
-                        downloadUrl: data.downloadUrl,
+                        downloadUrl: getPlatformDownloadUrl(data),
                         releaseNotes: data.releaseNotes,
                         hasUpdate: data.version !== APP_VERSION
                     };
