@@ -268,7 +268,13 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         try {
             localStorage.setItem(GLOBAL_SETTINGS_KEY, JSON.stringify(globalSettings));
         } catch (error) {
-            console.error('Fehler beim Speichern:', error);
+            console.warn('[Store] localStorage voll, versuche ohne Hintergrundbild...', error);
+            try {
+                const reduced = { ...globalSettings, certificateBackgroundImage: undefined };
+                localStorage.setItem(GLOBAL_SETTINGS_KEY, JSON.stringify(reduced));
+            } catch (error2) {
+                console.error('[Store] Auch reduziertes Speichern fehlgeschlagen:', error2);
+            }
         }
     }, [globalSettings]);
 
@@ -397,11 +403,20 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
                 customTextFields: importedFields ?? prev.customTextFields
             };
 
-            // SYNCHRON in localStorage speichern - kritisch für Reload nach Import!
+            // SYNCHRON in localStorage speichern
             try {
                 localStorage.setItem(GLOBAL_SETTINGS_KEY, JSON.stringify(newGlobalSettings));
+                console.log('[Import] Daten erfolgreich in localStorage gespeichert');
             } catch (error) {
-                console.error('Fehler beim synchronen Speichern nach Import:', error);
+                console.warn('[Import] localStorage voll, versuche ohne Hintergrundbild zu speichern...', error);
+                // Fallback: Ohne Gesellenbrief-Hintergrundbild speichern (größter Posten)
+                try {
+                    const reducedSettings = { ...newGlobalSettings, certificateBackgroundImage: undefined };
+                    localStorage.setItem(GLOBAL_SETTINGS_KEY, JSON.stringify(reducedSettings));
+                    console.log('[Import] Gespeichert (ohne Hintergrundbild - zu groß für localStorage)');
+                } catch (error2) {
+                    console.error('[Import] Auch reduziertes Speichern fehlgeschlagen:', error2);
+                }
             }
 
             return newGlobalSettings;

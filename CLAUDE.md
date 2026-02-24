@@ -68,12 +68,13 @@ LicenseInfo (localStorage: gp_digital_license)
 - **`src/lib/types.ts`** - Core TypeScript types: `Student`, `Grade`, `GradingSheet`, `Jahrgang`, `GlobalSettings`, `CertificatePositions`. Contains `INITIAL_DATA` with default exam structure and `DEFAULT_CERTIFICATE_POSITIONS`.
 
 - **`src/lib/grading.ts`** - Grade calculation logic (GPO-konform). Key functions: `calculatePart2Total()` (Praxis×0.6 + Theorie×0.4), `calculateTheoryTotal()` / `calculateTheorySubjectPercent()` (schriftl.×2 + mündl.×1), `isPassed()` (Gesamtnote + Sperrfach-Prüfung), `calculateFinalResult()` (Teil 1×0.25 + Teil 2×0.75).
+- **`src/lib/exportUtils.ts`** - Multi-Sheet Excel Export utilities. `calculateStudentResults()` computes full exam results per student (mirrors GradingPage logic). Sheet builders: `buildStammdatenRows()` (demographics, reimport-compatible), `buildErgebnisseRows()` (grade overview), `buildDetailRows()` (per-examiner scores). Helpers: `getAvgScore()`, `getExamPieceAvg()`, `round2()`.
 
 ### Pages
 
 - **LicensePage** (`src/pages/LicensePage.tsx`) - License activation before app use
 - **WelcomePage** (`src/pages/WelcomePage.tsx`) - Login page with first-time setup flow
-- **StudentsPage** (`src/pages/StudentsPage.tsx`) - Student management with list/grid views, Excel import/export, active/inactive status toggle. View mode persists in localStorage.
+- **StudentsPage** (`src/pages/StudentsPage.tsx`) - Student management with list/grid views, Multi-Sheet Excel export (3 Blätter: Stammdaten, Ergebnisse, Detail-Bewertung), Excel import, active/inactive status toggle. View mode persists in localStorage. Export filename: `Pruefungsergebnisse_Export_YYYY-MM-DD.xlsx`.
 - **GradingPage** (`src/pages/GradingPage.tsx`) - Exam grading interface for Teil 1 and Teil 2, multiple examiners per student, PDF generation. Examiners can be selected from Prüferpool dropdown.
 - **GesellenbriefePage** (`src/pages/GesellenbriefePage.tsx`) - Print journeyman certificates for passed students. Filters using `isPassed()` (Gesamtnote + Sperrfach-Prüfung). Supports serial printing (Seriendruck) and custom background images.
 **Routing**: Uses `HashRouter` (not `BrowserRouter`) for Electron `file://` compatibility.

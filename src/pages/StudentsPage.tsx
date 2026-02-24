@@ -1,12 +1,13 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { useStore } from '../lib/store';
-import { Plus, Search, Trash2, User, Building2, Edit, FileSpreadsheet, Download, LayoutGrid, List, UserX, UserCheck, FolderInput, AlertTriangle } from 'lucide-react';
+import { Plus, Search, Trash2, User, Building2, Edit, FileSpreadsheet, Download, LayoutGrid, List, UserX, UserCheck, FolderInput, AlertTriangle, Shield } from 'lucide-react';
 import { Student, Gender, Wahlqualifikation, Grade } from '../lib/types';
 import { cn } from '../lib/utils';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import { CertificateDocument } from '../components/CertificateDocument';
 import { parseGermanDate } from '../lib/dateUtils';
 import { usePasswordProtection } from '../components/PasswordDialog';
+import { buildStammdatenRows, buildErgebnisseRows, buildDetailRows } from '../lib/exportUtils';
 import * as XLSX from 'xlsx';
 
 type ViewMode = 'grid' | 'list';
@@ -21,7 +22,11 @@ export default function StudentsPage() {
         // Berechtigungen
         canModifyStudents, canDeleteData,
         // Jahrgang-Verwaltung
-        jahrgaenge, currentJahrgangId, moveStudentToJahrgang
+        jahrgaenge, currentJahrgangId, moveStudentToJahrgang,
+        // Gesellenbrief-Einstellungen (für Komplett-Backup)
+        certificateBackgroundImage, certificatePositions, customTextFields,
+        // Daten-Import (für Komplett-Backup Wiederherstellung)
+        importData
     } = useStore();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingStudent, setEditingStudent] = useState<Student | undefined>(undefined);
@@ -33,6 +38,7 @@ export default function StudentsPage() {
     });
     const [filterMode, setFilterMode] = useState<FilterMode>('all');
     const fileInputRef = useRef<HTMLInputElement>(null);
+    const jsonFileInputRef = useRef<HTMLInputElement>(null);
     const { requestPassword, PasswordDialogComponent } = usePasswordProtection();
 
     // Ansichtsmodus in localStorage speichern
@@ -215,48 +221,56 @@ export default function StudentsPage() {
     // --- Excel Export (ohne Blattschutz - einfacher Export) ---
     const handleExcelExport = () => {
         try {
-            const formatDate = (d?: string) => d ? new Date(d).toLocaleDateString('de-DE') : '';
-        const exportData = data.students.map(s => ({
-            "Anrede": s.gender || "",
-            "Vorname": s.firstName,
-            "Nachname": s.lastName,
-            "Prüfungsnummer": s.examNumber,
+            const wb = XLSX.utils.book_new();
 
-            "Geburtsdatum": formatDate(s.dob),
-            "Geburtsort": s.birthPlace || "",
-            "Geburtsland": s.birthCountry || "",
+            // Blatt 1: Stammdaten (reimport-kompatibel)
+            const stammdatenRows = buildStammdatenRows(data.students);
+            const ws1 = XLSX.utils.json_to_sheet(stammdatenRows);
+            ws1['!cols'] = [
+                { wch: 8 }, { wch: 15 }, { wch: 15 }, { wch: 15 }, { wch: 12 },
+                { wch: 15 }, { wch: 14 }, { wch: 20 }, { wch: 10 }, { wch: 8 },
+                { wch: 15 }, { wch: 22 }, { wch: 15 }, { wch: 20 }, { wch: 20 },
+                { wch: 18 }, { wch: 15 }, { wch: 20 }, { wch: 12 }, { wch: 12 },
+                { wch: 16 }, { wch: 16 }, { wch: 18 },
+            ];
+            XLSX.utils.book_append_sheet(wb, ws1, 'Stammdaten');
 
-            "Straße": s.street || "",
-            "Hausnummer": s.houseNumber || "",
-            "PLZ": s.zip || "",
-            "Stadt": s.city || "",
-            "E-Mail": s.email || "",
-            "Handy": s.mobile || "",
+            // Blatt 2: Ergebnisse (Noten-Übersicht)
+            const ergebnisseRows = buildErgebnisseRows(data.students, data.grades, data.sheets);
+            const ws2 = XLSX.utils.json_to_sheet(ergebnisseRows);
+            ws2['!cols'] = [
+                { wch: 15 }, { wch: 15 }, { wch: 15 }, { wch: 10 },
+                { wch: 12 }, { wch: 10 }, { wch: 14 },
+                { wch: 16 }, { wch: 14 }, { wch: 16 }, { wch: 14 },
+                { wch: 16 }, { wch: 10 }, { wch: 14 },
+                { wch: 13 }, { wch: 10 }, { wch: 16 },
+                { wch: 10 }, { wch: 25 },
+            ];
+            XLSX.utils.book_append_sheet(wb, ws2, 'Ergebnisse');
 
-            "Betrieb": s.salon,
-            "Betrieb Straße": s.salonStreet || "",
-            "Betrieb PLZ Ort": s.salonZipCity || "",
-            "Betrieb Telefon": s.salonPhone || "",
-            "Firma": s.company || "",
+            // Blatt 3: Detail-Bewertung (Prüfer-Einzelpunkte)
+            const detailRows = buildDetailRows(data.students, data.grades, data.sheets);
+            const ws3 = XLSX.utils.json_to_sheet(detailRows);
+            // Dynamische Spaltenbreiten: schmale Spalten für Punkte, breitere für Bezeichnungen
+            if (detailRows.length > 0) {
+                const cols = Object.keys(detailRows[0]).map(key => ({
+                    wch: key.includes('Bezeichnung') ? 14
+                        : key.includes('Bestanden') ? 10
+                        : key.includes('Gesamt') ? 14
+                        : key.length > 20 ? 14
+                        : Math.max(key.length + 2, 10),
+                }));
+                ws3['!cols'] = cols;
+            }
+            XLSX.utils.book_append_sheet(wb, ws3, 'Detail-Bewertung');
 
-            "Lehrzeit Von": formatDate(s.trainingStart),
-            "Lehrzeit Bis": formatDate(s.trainingEnd),
-            "Prüfungsdatum Teil 1": formatDate(s.examDatePart1),
-            "Prüfungsdatum Teil 2": formatDate(s.examDatePart2),
-            "Wahlqualifikation": s.wahlqualifikation || "",
-        }));
-
-        const wb = XLSX.utils.book_new();
-            const ws = XLSX.utils.json_to_sheet(exportData);
-            XLSX.utils.book_append_sheet(wb, ws, "Prüflinge");
-
-            // Verwende Blob + Download-Link (funktioniert in Electron und Browser)
+            // Download (funktioniert in Electron und Browser)
             const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
             const blob = new Blob([wbout], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `Prueflinge_Export_${new Date().toISOString().split('T')[0]}.xlsx`;
+            a.download = `Pruefungsergebnisse_Export_${new Date().toISOString().split('T')[0]}.xlsx`;
             document.body.appendChild(a);
             a.click();
             setTimeout(() => {
@@ -266,6 +280,66 @@ export default function StudentsPage() {
         } catch (error) {
             console.error('Excel-Export Fehler:', error);
         }
+    };
+
+    // --- Komplett-Backup (JSON inkl. Noten, Prüfungsstruktur, Gesellenbrief-Einstellungen) ---
+    const handleFullBackup = () => {
+        try {
+            const exportData = {
+                ...data,
+                certificateBackgroundImage,
+                certificatePositions,
+                customTextFields
+            };
+            const jsonString = JSON.stringify(exportData, null, 2);
+            const blob = new Blob([jsonString], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `gp_digital_komplett_backup_${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(() => {
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }, 100);
+        } catch (error) {
+            console.error('Komplett-Backup Fehler:', error);
+        }
+    };
+
+    // --- Komplett-Backup Import (JSON mit Noten wiederherstellen) ---
+    const handleFullBackupImport = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            try {
+                const importedData = JSON.parse(event.target?.result as string);
+                console.log('[Backup-Import] Datei geladen:', file.name);
+                console.log('[Backup-Import] Prüflinge:', importedData.students?.length ?? 0);
+                console.log('[Backup-Import] Noten:', importedData.grades?.length ?? 0);
+                console.log('[Backup-Import] Sheets:', importedData.sheets?.length ?? 0);
+                console.log('[Backup-Import] Aktueller Jahrgang:', currentJahrgangId);
+
+                if (Array.isArray(importedData.students) && Array.isArray(importedData.sheets)) {
+                    const summary = `Backup enthält:\n• ${importedData.students.length} Prüflinge\n• ${importedData.grades?.length || 0} Benotungen\n• ${importedData.sheets.length} Prüfungsblätter\n\nMöchten Sie die vorhandenen Daten überschreiben?`;
+                    if (confirm(summary)) {
+                        importData(importedData);
+                        alert(`Komplett-Backup erfolgreich importiert!\n\n${importedData.students.length} Prüflinge und ${importedData.grades?.length || 0} Benotungen geladen.`);
+                    }
+                } else {
+                    alert('Ungültiges Dateiformat. Bitte wählen Sie eine gültige Backup-Datei (.json).\n\nErwartet: students[] und sheets[]');
+                }
+            } catch (error) {
+                console.error('[Backup-Import] Fehler:', error);
+                alert('Fehler beim Importieren der Datei:\n' + (error as Error).message);
+            }
+        };
+        reader.readAsText(file);
+        // Input zurücksetzen, damit die gleiche Datei nochmal gewählt werden kann
+        e.target.value = '';
     };
 
     // --- Excel Import (mit Update-Funktion für bestehende Prüflinge) ---
@@ -461,6 +535,25 @@ export default function StudentsPage() {
                             <span className="relative z-10">Excel Import</span>
                         </button>
                         <input type="file" ref={fileInputRef} hidden accept=".xlsx, .xls" onChange={handleExcelImport} />
+                        <button
+                            onClick={handleFullBackup}
+                            className="group relative bg-gradient-to-b from-indigo-500 to-indigo-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:from-indigo-400 hover:to-indigo-600 transition-all shadow-lg shadow-indigo-500/25 text-sm font-medium"
+                            title="Vollständiges Backup inkl. aller Noten und Einstellungen (JSON)"
+                        >
+                            <div className="absolute inset-0 rounded-lg bg-gradient-to-t from-transparent via-white/10 to-white/20" />
+                            <Shield size={18} className="relative z-10" />
+                            <span className="relative z-10">Komplett-Backup</span>
+                        </button>
+                        <button
+                            onClick={() => jsonFileInputRef.current?.click()}
+                            className="group relative bg-gradient-to-b from-indigo-600/50 to-indigo-800/60 text-indigo-200 px-4 py-2 rounded-lg flex items-center gap-2 hover:from-indigo-500/60 hover:to-indigo-700/70 transition-all shadow-lg border border-indigo-500/30 text-sm font-medium"
+                            title="Komplett-Backup wiederherstellen (JSON)"
+                        >
+                            <div className="absolute inset-0 rounded-lg bg-gradient-to-t from-transparent via-white/5 to-white/10" />
+                            <FolderInput size={18} className="relative z-10" />
+                            <span className="relative z-10">Backup laden</span>
+                        </button>
+                        <input type="file" ref={jsonFileInputRef} hidden accept=".json" onChange={handleFullBackupImport} />
 
                         {/* Nur für Admins: Alle löschen */}
                         {canDeleteData() && (
