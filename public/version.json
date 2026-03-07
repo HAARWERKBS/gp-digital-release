@@ -1,10 +1,10 @@
 {
-  "version": "1.4.3",
-  "releaseDate": "2026-03-06",
+  "version": "1.4.4",
+  "releaseDate": "2026-03-07",
   "downloadUrl": "https://github.com/HAARWERKBS/gp-digital-release/releases/latest",
   "downloads": {
-    "mac": "https://github.com/HAARWERKBS/gp-digital-release/releases/download/v1.4.3/GP.Digital-1.4.3-universal.dmg",
-    "win": "https://github.com/HAARWERKBS/gp-digital-release/releases/download/v1.4.3/GP.Digital.Setup.1.4.3.exe"
+    "mac": "https://github.com/HAARWERKBS/gp-digital-release/releases/download/v1.4.4/GP.Digital-1.4.4-universal.dmg",
+    "win": "https://github.com/HAARWERKBS/gp-digital-release/releases/download/v1.4.4/GP.Digital.Setup.1.4.4.exe"
   },
   "releaseNotes": "",
   "updateUrl": ""
