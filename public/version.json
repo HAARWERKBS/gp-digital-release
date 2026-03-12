@@ -1,11 +1,11 @@
 {
-  "version": "1.4.6",
-  "releaseDate": "2026-03-10",
+  "version": "1.4.7",
+  "releaseDate": "2026-03-12",
   "downloadUrl": "https://github.com/HAARWERKBS/gp-digital-release/releases/latest",
   "downloads": {
-    "mac": "https://github.com/HAARWERKBS/gp-digital-release/releases/download/v1.4.6/GP.Digital-1.4.6-universal.dmg",
-    "win": "https://github.com/HAARWERKBS/gp-digital-release/releases/download/v1.4.6/GP.Digital.Setup.1.4.6.exe"
+    "mac": "https://github.com/HAARWERKBS/gp-digital-release/releases/download/v1.4.7/GP.Digital-1.4.7-universal.dmg",
+    "win": "https://github.com/HAARWERKBS/gp-digital-release/releases/download/v1.4.7/GP.Digital.Setup.1.4.7.exe"
   },
-  "releaseNotes": "GPO-konforme Prüfungsstruktur, Neutral-Zustand, Was-ist-neu-Dialog",
+  "releaseNotes": "Online-Lizenzserver, Neues Schlüsselformat, Alte Keys nicht mehr unterstützt",
   "updateUrl": ""
 }
